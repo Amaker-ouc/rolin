@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rolin.dao.ModuleDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.rolin.entity.ModuleDetail" >
+    <id column="module_detail_id" property="moduleDetailId" jdbcType="INTEGER" />
+    <result column="goods_module_id" property="goodsModuleId" jdbcType="INTEGER" />
+    <result column="module_img" property="moduleImg" jdbcType="CHAR" />
+    <result column="module_des" property="moduleDes" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    module_detail_id, goods_module_id, module_img, module_des
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from module_detail
+    where module_detail_id = #{moduleDetailId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByGoodsModuleId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from module_detail
+    where goods_module_id = #{goodsModuleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from module_detail
+    where module_detail_id = #{moduleDetailId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rolin.entity.ModuleDetail" >
+    insert into module_detail (module_detail_id, goods_module_id, module_img, 
+      module_des)
+    values (#{moduleDetailId,jdbcType=INTEGER}, #{goodsModuleId,jdbcType=INTEGER}, #{moduleImg,jdbcType=CHAR}, 
+      #{moduleDes,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rolin.entity.ModuleDetail" >
+    insert into module_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="moduleDetailId != null" >
+        module_detail_id,
+      </if>
+      <if test="goodsModuleId != null" >
+        goods_module_id,
+      </if>
+      <if test="moduleImg != null" >
+        module_img,
+      </if>
+      <if test="moduleDes != null" >
+        module_des,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="moduleDetailId != null" >
+        #{moduleDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsModuleId != null" >
+        #{goodsModuleId,jdbcType=INTEGER},
+      </if>
+      <if test="moduleImg != null" >
+        #{moduleImg,jdbcType=CHAR},
+      </if>
+      <if test="moduleDes != null" >
+        #{moduleDes,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rolin.entity.ModuleDetail" >
+    update module_detail
+    <set >
+      <if test="goodsModuleId != null" >
+        goods_module_id = #{goodsModuleId,jdbcType=INTEGER},
+      </if>
+      <if test="moduleImg != null" >
+        module_img = #{moduleImg,jdbcType=CHAR},
+      </if>
+      <if test="moduleDes != null" >
+        module_des = #{moduleDes,jdbcType=CHAR},
+      </if>
+    </set>
+    where module_detail_id = #{moduleDetailId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rolin.entity.ModuleDetail" >
+    update module_detail
+    set goods_module_id = #{goodsModuleId,jdbcType=INTEGER},
+      module_img = #{moduleImg,jdbcType=CHAR},
+      module_des = #{moduleDes,jdbcType=CHAR}
+    where module_detail_id = #{moduleDetailId,jdbcType=INTEGER}
+  </update>
+</mapper>

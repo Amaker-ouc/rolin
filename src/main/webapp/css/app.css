@@ -1,0 +1,468 @@
+/* Your app styles here */
+.ios .tabbar-labels .tab-link:not(.tab-link-active) .icon-ios-fill {
+    display: none;
+}
+.ios .tabbar-labels .tab-link.tab-link-active .icon:not(.icon-ios-fill) {
+    display: none;
+}
+
+/* A bit of demo styles */
+.home-swiper .swiper-slide {
+    font-size: 25px;
+    font-weight: 300;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    color: #000;
+}
+.home-swiper {
+    margin: 0px 0 35px;
+    font-size: 18px;
+    height: 120px;
+}
+.introduction>p,.block-title{
+    text-align: center;
+}
+.introduction p:first-child{
+    font-size: 18px;
+}
+
+.activity-card-header-pic .card-header {
+    height: 40vw;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+}
+.activity-card-header-pic .card-content-padding .date{
+    color: #8e8e93;
+}
+
+.searchbar-back{
+    margin-right:15px;
+    margin-left:10px;
+}
+.md-searchbar-input-wrap{
+    padding-top: 13px;
+    margin-right: 30px;
+}
+.md-searchbar-input{
+    padding: 5px !important;
+    background: #fff !important;
+    height: 70% !important;
+    border-radius: 10px !important;
+    font-size:16px !important;
+}
+.md-searchbar-inner{
+    background: #eeeeee;
+}
+.goods-card{
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    margin:2px !important;
+}
+.goods-cards-block{
+    padding: 5px !important;
+    background: rgb(239, 239, 244);
+}
+.goods-card-content{
+    padding:5px !important;
+}
+.goods-card-content>p{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.goods-card-content>p:first-child{
+    margin-bottom: 5px;
+}
+.goods-card-content>p:nth-child(2){
+    margin-top: 5px;
+}
+.goods-card-link:link{
+    color:rgb(109, 109, 114) !important;
+}
+.navbar{
+    background: #f7f7f8 !important;
+}
+.navbar-inner>.title{
+    color:#1b1b1b;
+}
+.navbar-inner>.right,.navbar-inner>.left{
+    color:orange;
+}
+.user-head-a{
+    width:100%;
+}
+.user-head-card{
+    width:100%;
+    margin:20px 0 0 0!important;
+    box-shadow: none !important;
+}
+.user-head-card .card-header {
+    height: 90px;
+    display: block;
+    padding: 15px 20px;
+}
+.user-head-card .user-head-avatar {
+    float: left;
+}
+.user-head-card .user-head-name {
+    margin:16px 80px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.user-head-card .card-footer {
+    background: #fafafa;
+}
+.user-head-card .card-footer a {
+    color: #81848b;
+    font-weight: 500;
+}
+.user-head-card .card-content img {
+    display: block;
+}
+.user-head-card .card-content-padding {
+    padding: 15px 10px;
+}
+.user-head-card .card-content-padding .likes {
+    color: #8e8e93;
+}
+.user-page-content{
+    background: #efeff4 !important;
+}
+.user-ul{
+    background: #fff;
+}
+.login-page-title .segmented{
+    background: #ccc !important;
+}
+#map-container{
+    height: 100%;
+}
+
+.shop-card{
+    padding-top: 20px;
+    padding-bottom: 0;
+    text-align: center;
+    color:white;
+    background: url("/images/shop-bg.jpg") top;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+}
+.shop-head{
+    display: block;
+}
+.shop-head>img{
+    height: 60px;
+    border-radius:30px;
+}
+.shop-name,.shop-introduce,.member-fans{
+    display: block;
+}
+.shop-tab{
+    height: 30px !important;
+    padding: 0 30px !important;
+    text-align: center;
+    font-size: 16px;
+}
+.shop-tab-link{
+    height: 30px;
+    display:block;
+}
+.shop-tab-inner a.tab-link::after{
+    background-color: orange;
+    bottom: 0;
+    content: "";
+    display: block;
+    left: 50%;
+    position: absolute;
+    height: 2px;
+    width: 0;
+    transition: width 0.5s,left 0.5s;
+    -moz-transition: width 0.5s,left 0.5s;	/* Firefox 4 */
+    -webkit-transition: width 0.5s,left 0.5s;	/* Safari 和 Chrome */
+    -o-transition: width 0.5s,left 0.5s;
+}
+.shop-tab-inner a.tab-link-active::after{
+    background-color: orange;
+    bottom: 0;
+    content: "";
+    display: block;
+    left: 0;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    transition: width 0.5s,left 0.5s;
+    -moz-transition: width 0.5s,left 0.5s;	/* Firefox 4 */
+    -webkit-transition: width 0.5s,left 0.5s;	/* Safari 和 Chrome */
+    -o-transition: width 0.5s,left 0.5s;
+}
+.navbar a{
+    color:black !important;
+}
+.shop-subnavbar{
+    height: 30px !important;
+    padding: 0 30px !important;
+    text-align: center;
+    font-size: 16px;
+}
+.popover-goods-action-list{
+    width:150px;
+}
+.shop-toolbar i{
+    color:orange;
+}
+.goods-detail-head,.activity-head{
+    text-align: center;
+    background: white;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.goods-detail-head img,.activity-head img{
+    width: 100%;
+    display: block;
+}
+.goods-detail-name,.activity-introduce{
+    font-size:16px;
+    font-weight: bold;
+}
+.goods-detail-price-yuan{
+    font-size: 16px;
+    color:orange;
+}
+.goods-detail-price{
+    font-size: 26px;
+    color: orange;
+    padding-left: 5px;
+}
+.goods-detail-module{
+    background:white;
+    padding: 10px 5px 5px 5px;
+}
+.goods-detail-module-name{
+    font-size: 16px;
+    font-weight: bold;
+}
+.goods-detail-module-name i {
+    color: orange;
+}
+.goods-detail-module-name span {
+    padding-left: 5px;
+}
+
+.goods-detail-module-imgText{
+    display: block;
+    text-align: center;
+    padding: 10px;
+}
+.goods-detail-module-imgText img{
+    width: 100%;
+    display: block;
+}
+.goods-navbar,.activity-navbar{
+    background: rgba(255,255,255,0) !important;
+}
+.goods-navbar::after,.activity-navbar::after{
+    content:none !important;
+}
+.goods-page-content,.activity-page-content{
+    padding-top:0 !important;
+}
+.goods-navbar a,.activity-navbar a{
+    width: 34px !important;
+    height: 34px !important;
+    text-align: center;
+    display: block !important;
+    border-radius: 22px;
+    background: rgba(0,0,0,0.7);
+}
+.goods-navbar i,.activity-navbar i{
+    color:white;
+    display: block !important;
+    margin: 6px;
+}
+.moment-card,.cart-card{
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    padding:10px;
+}
+.moment-card-header,.cart-card-header{
+    display: block;
+}
+.moment-card-avatar,.cart-card-avatar{
+    float: left;
+}
+.moment-card-avatar img{
+    width:34px;
+    height:34px;
+}
+.moment-card-name{
+    margin-left: 44px;
+    font-size: 14px;
+    font-weight: 600;
+}
+.moment-card-date {
+    margin-left: 44px;
+    font-size: 13px;
+    color: #8e8e93;
+}
+.moment-card-footer {
+    background: #fafafa;
+}
+.moment-card-footer a {
+    color: #81848b;
+    font-weight: 500;
+}
+.moment-card-content{
+    padding-top: 5px;
+}
+.moment-card-content-img-inner img {
+    width: 100%;
+    display: block;
+}
+
+.moment-card-content-img-inner{
+    height: 150px;
+    display: block;
+    overflow: hidden;
+}
+.moment-card-introduce{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.cart-card{
+    margin: 0 0 5px 0 !important;
+    border-radius: 0 0 10px 10px;
+}
+.cart-card-name{
+    font-size: 14px;
+    font-weight: 600;
+}
+.cart-card-name>i.icon{
+    right: 5px;
+    right: 20px;
+    position: absolute;
+    font-size: 18px;
+    font-weight: bold;
+}
+.cart-card-name span{
+    margin-left:10px;
+}
+.cart-pay-bar{
+    z-index: 500;
+    position: absolute;
+    bottom:50px;
+    width: 100%;
+    background:#f7f7f8;
+    display: block;
+}
+.cart-pay-bar-inner{
+    display: block;
+    padding: 5px;
+}
+.cart-pay-bar-inner-select,.cart-pay-bar-inner-sum,.cart-pay-bar-inner-pay-btn{
+    line-height: 30px;
+}
+.cart-pay-bar-inner-sum .sum{
+    font-size: 18px;
+    font-weight: bold;
+}
+.cart-page-content{
+    padding-bottom: 90px !important;
+}
+.order-commit-head{
+    display: block;
+    margin: 10px;
+    background:white;
+    height: 150px;
+}
+.order-commit-head>a{
+    display: block;
+    padding: 10px;
+    color: black !important;
+    position: relative;
+    border-bottom: solid 1px #f7f7f8;
+}
+.order-commit-head>a.pay-type p{
+    margin:0;
+}
+.order-commit-head .user-message{
+    font-size: 20px;
+    font-weight: bold;
+    margin:0;
+}
+.order-commit-head .address{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    padding-right:30px;
+}
+.order-commit-head .address p{
+    margin: 10px 0 0 0;
+}
+.order-commit-head .right-arrow-inner{
+    position: absolute;
+    right:20px;
+    bottom:0;
+}
+.order-commit-head .pay-type .title{
+    font-size: 12px;
+    color: #2f2f2f;
+}
+.order-commit-head .pay-type .choose-content{
+    font-weight: bold;
+}
+.order-commit-head .address-a .right-arrow-inner i{
+    line-height: 67px;
+}
+.order-commit-head .pay-type .right-arrow-inner i{
+    line-height: 56px;
+}
+.order-commit-card{
+    margin:10px !important;
+}
+.will-card{
+    display: block;
+    position: relative;
+    margin:10px;
+    padding:10px;
+    background: white;
+    border-radius: 0 0 10px 10px;
+}
+.will-card p{
+    margin:0;
+}
+.will-card .title{
+    font-size: 12px;
+    color: #2f2f2f;
+}
+.will-card .content{
+    font-weight: bold;
+}
+.will-card .right-arrow-inner{
+    position: absolute;
+    right:20px;
+    bottom:0;
+}
+.will-card .right-arrow-inner i{
+    line-height: 56px;
+}
+.will-card-group{
+    margin: 10px;
+    border-radius: 0 0 10px 10px;
+}
+.will-card-group .will-card{
+    margin: 0;
+    border-radius: 0;
+}
+.order-commit-bar{
+    bottom:0;
+}
+.will-list{
+    margin:0 !important;
+}

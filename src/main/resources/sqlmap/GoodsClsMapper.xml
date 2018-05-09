@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rolin.dao.GoodsClsMapper" >
+  <resultMap id="BaseResultMap" type="com.rolin.entity.GoodsCls" >
+    <id column="cls_id" property="clsId" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="goods_cls_pic" property="goodsClsPic" jdbcType="CHAR" />
+    <result column="goods_cls_name" property="goodsClsName" jdbcType="CHAR" />
+    <result column="goods_cls_price" property="goodsClsPrice" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cls_id, goods_id, goods_cls_pic, goods_cls_name, goods_cls_price
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods_cls
+    where cls_id = #{clsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goods_cls
+    where cls_id = #{clsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rolin.entity.GoodsCls" >
+    insert into goods_cls (cls_id, goods_id, goods_cls_pic, 
+      goods_cls_name, goods_cls_price)
+    values (#{clsId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{goodsClsPic,jdbcType=CHAR}, 
+      #{goodsClsName,jdbcType=CHAR}, #{goodsClsPrice,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rolin.entity.GoodsCls" >
+    insert into goods_cls
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="clsId != null" >
+        cls_id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="goodsClsPic != null" >
+        goods_cls_pic,
+      </if>
+      <if test="goodsClsName != null" >
+        goods_cls_name,
+      </if>
+      <if test="goodsClsPrice != null" >
+        goods_cls_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="clsId != null" >
+        #{clsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsClsPic != null" >
+        #{goodsClsPic,jdbcType=CHAR},
+      </if>
+      <if test="goodsClsName != null" >
+        #{goodsClsName,jdbcType=CHAR},
+      </if>
+      <if test="goodsClsPrice != null" >
+        #{goodsClsPrice,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rolin.entity.GoodsCls" >
+    update goods_cls
+    <set >
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsClsPic != null" >
+        goods_cls_pic = #{goodsClsPic,jdbcType=CHAR},
+      </if>
+      <if test="goodsClsName != null" >
+        goods_cls_name = #{goodsClsName,jdbcType=CHAR},
+      </if>
+      <if test="goodsClsPrice != null" >
+        goods_cls_price = #{goodsClsPrice,jdbcType=REAL},
+      </if>
+    </set>
+    where cls_id = #{clsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rolin.entity.GoodsCls" >
+    update goods_cls
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      goods_cls_pic = #{goodsClsPic,jdbcType=CHAR},
+      goods_cls_name = #{goodsClsName,jdbcType=CHAR},
+      goods_cls_price = #{goodsClsPrice,jdbcType=REAL}
+    where cls_id = #{clsId,jdbcType=INTEGER}
+  </update>
+</mapper>

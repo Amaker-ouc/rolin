@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rolin.dao.GoodsModuleMapper" >
+  <resultMap id="BaseResultMap" type="com.rolin.entity.GoodsModule" >
+    <id column="goods_module_id" property="goodsModuleId" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="module_name" property="moduleName" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    goods_module_id, goods_id, module_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods_module
+    where goods_module_id = #{goodsModuleId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByGoodsId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select *
+    from goods_module
+    where goods_id = #{goodsId}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goods_module
+    where goods_module_id = #{goodsModuleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rolin.entity.GoodsModule" >
+    insert into goods_module (goods_module_id, goods_id, module_name
+      )
+    values (#{goodsModuleId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{moduleName,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rolin.entity.GoodsModule" >
+    insert into goods_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsModuleId != null" >
+        goods_module_id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="moduleName != null" >
+        module_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsModuleId != null" >
+        #{goodsModuleId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="moduleName != null" >
+        #{moduleName,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rolin.entity.GoodsModule" >
+    update goods_module
+    <set >
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="moduleName != null" >
+        module_name = #{moduleName,jdbcType=CHAR},
+      </if>
+    </set>
+    where goods_module_id = #{goodsModuleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rolin.entity.GoodsModule" >
+    update goods_module
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      module_name = #{moduleName,jdbcType=CHAR}
+    where goods_module_id = #{goodsModuleId,jdbcType=INTEGER}
+  </update>
+</mapper>

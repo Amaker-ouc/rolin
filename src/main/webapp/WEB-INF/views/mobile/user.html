@@ -1,0 +1,226 @@
+<!--suppress ALL -->
+<div class="page" data-name="user" id="user-page">
+  <div class="navbar no-shadow no-hairline">
+    <div class="navbar-inner sliding">
+      <div class="title">我的</div>
+      <div class="right">
+        <a href="#" class="link icon-only popup-open" data-popup="#setting-popup">
+          <i class="icon f7-icons ios-only">settings</i>
+          <i class="icon material-icons md-only">settings</i>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="page-content user-page-content">
+    <a href="#" class="user-head-a link popup-open" data-popup="#login-popup">
+      <div class="card user-head-card no-shadow no-hairline">
+        <div class="card-header">
+          <div class="user-head-avatar" id="userHead"><img id="user-head-img" src={{$root.user.head}} width="60" height="60"/></div>
+          <div class="user-head-name"><p id="userName-p">{{$root.user.userName}}</p></div>
+        </div>
+      </div>
+    </a>
+    <div class="list">
+      <ul class="user-ul">
+        <li>
+          <a href="/user/shopCollection" class="item-link item-content">
+            <div class="item-media icon-only">
+              <i class="icon f7-icons ios-only">box_fill</i>
+              <i class="icon material-icons md-only">local_mall</i>
+            </div>
+            <div class="item-inner">
+              <div class="item-title">关注的店铺</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="/user/activityCollection" class="item-link item-content">
+            <div class="item-media icon-only">
+              <i class="icon f7-icons ios-only">star_fill</i>
+              <i class="icon material-icons md-only">favorite</i>
+            </div>
+            <div class="item-inner">
+              <div class="item-title">喜欢的活动</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="/user/goodsCollection" class="item-link item-content">
+            <div class="item-media icon-only">
+              <i class="icon f7-icons ios-only">bookmark_fill</i>
+              <i class="icon material-icons md-only">bookmark</i>
+            </div>
+            <div class="item-inner">
+              <div class="item-title">收藏的商品</div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="list">
+      <ul class="user-ul">
+        <li>
+          <a href="#" class="item-link item-content">
+            <div class="item-media icon-only">
+              <i class="icon f7-icons ios-only">favorites_fill</i>
+              <i class="icon material-icons md-only">account_balance_wallet</i>
+            </div>
+            <div class="item-inner">
+              <div class="item-title">我的订单</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="item-link item-content">
+            <div class="item-media icon-only">
+              <i class="icon f7-icons ios-only">time_fill</i>
+              <i class="icon material-icons md-only">history</i>
+            </div>
+            <div class="item-inner">
+              <div class="item-title">浏览记录</div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="list">
+      <ul class="user-ul">
+        <li>
+          <a href="/shop/123" class="item-link item-content">
+            <div class="item-media icon-only">
+              <i class="icon f7-icons ios-only">data_fill</i>
+              <i class="icon material-icons md-only">store_mall_directory</i>
+            </div>
+            <div class="item-inner">
+              <div class="item-title">我的店铺</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="item-link item-content">
+            <div class="item-media icon-only">
+              <i class="icon f7-icons ios-only">card_fill</i>
+              <i class="icon material-icons md-only">call_to_action
+              </i>
+            </div>
+            <div class="item-inner">
+              <div class="item-title">我的会员</div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- popup -->
+  <div class="popup" id="login-popup">
+    <div class="view">
+      <div class="page">
+        <div class="navbar no-shadow no-hairline">
+          <div class="navbar-inner">
+            <div class="title ios-only">
+              <!-- Buttons row as tabs controller in navbar-->
+              <div class="segmented">
+                <a href="#" class="tab-link tab-link-active button" data-tab=".tab1">登录</a>
+                <a href="#" class="tab-link button" data-tab=".tab2">注册</a>
+              </div>
+            </div>
+            <div class="title login-page-title md-only">
+              <!-- Buttons row as tabs controller in navbar-->
+              <div class="segmented">
+                <a href="#" class="tab-link tab-link-active button" data-tab=".tab1">登录</a>
+                <a href="#" class="tab-link button" data-tab=".tab2">注册</a>
+              </div>
+            </div>
+            <div class="right">
+              <a href="#" class="popup-close icon-only link">
+                <i class="icon f7-icons ios-only">close</i>
+                <i class="icon material-icons md-only">close</i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="page-content login-screen-content">
+          <div class="tabs-animated-wrap">
+            <div class="tabs tabs-bottom">
+              <div class="tab tab1 tab-active">
+                <div class="block">
+                  <div class="login-screen-title">登录</div>
+                  <form class="list" id="login-form">
+                    <ul>
+                      <li class="item-content item-input">
+                        <div class="item-inner">
+                          <div class="item-title item-label">账号</div>
+                          <div class="item-input-wrap">
+                            <input type="text" name="username" placeholder="输入账号">
+                          </div>
+                        </div>
+                      </li>
+                      <li class="item-content item-input">
+                        <div class="item-inner">
+                          <div class="item-title item-label">密码</div>
+                          <div class="item-input-wrap">
+                            <input type="password" name="password" placeholder="输入密码">
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </form>
+                  <div class="list">
+                    <ul>
+                      <li>
+                        <a href="#" class="item-link list-button login-button" id="login-button">登录</a>
+                      </li>
+                    </ul>
+                    <div class="block-footer">Some text about login information.<br>Click "Sign In" to close Login Screen</div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab tab2">
+                <div class="block">
+                  <div class="login-screen-title">注册</div>
+                  <form class="list" id="register-form">
+                    <ul>
+                      <li class="item-content item-input">
+                        <div class="item-inner">
+                          <div class="item-title item-label">账号</div>
+                          <div class="item-input-wrap">
+                            <input type="text" name="username" placeholder="输入账号">
+                          </div>
+                        </div>
+                      </li>
+                      <li class="item-content item-input">
+                        <div class="item-inner">
+                          <div class="item-title item-label">密码</div>
+                          <div class="item-input-wrap">
+                            <input type="password" name="password1" placeholder="输入密码">
+                          </div>
+                        </div>
+                      </li>
+                      <li class="item-content item-input">
+                        <div class="item-inner">
+                          <div class="item-title item-label">确认密码</div>
+                          <div class="item-input-wrap">
+                            <input type="password" name="password2" placeholder="再次输入密码">
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </form>
+                  <div class="list">
+                    <ul>
+                      <li>
+                        <a href="#" class="item-link list-button login-button" id="register-button">注册</a>
+                      </li>
+                    </ul>
+                    <div class="block-footer">Some text about login information.<br>Click "Sign In" to close Login Screen</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

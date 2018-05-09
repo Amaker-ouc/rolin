@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rolin.dao.ActCatMapper" >
+  <resultMap id="BaseResultMap" type="com.rolin.entity.ActCat" >
+    <id column="act_Id" property="actId" jdbcType="INTEGER" />
+    <result column="act_name" property="actName" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    act_Id, act_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from act_cat
+    where act_Id = #{actId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from act_cat
+    where act_Id = #{actId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rolin.entity.ActCat" >
+    insert into act_cat (act_Id, act_name)
+    values (#{actId,jdbcType=INTEGER}, #{actName,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rolin.entity.ActCat" >
+    insert into act_cat
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="actId != null" >
+        act_Id,
+      </if>
+      <if test="actName != null" >
+        act_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="actId != null" >
+        #{actId,jdbcType=INTEGER},
+      </if>
+      <if test="actName != null" >
+        #{actName,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rolin.entity.ActCat" >
+    update act_cat
+    <set >
+      <if test="actName != null" >
+        act_name = #{actName,jdbcType=CHAR},
+      </if>
+    </set>
+    where act_Id = #{actId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rolin.entity.ActCat" >
+    update act_cat
+    set act_name = #{actName,jdbcType=CHAR}
+    where act_Id = #{actId,jdbcType=INTEGER}
+  </update>
+</mapper>

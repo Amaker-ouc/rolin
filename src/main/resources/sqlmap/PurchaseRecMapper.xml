@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rolin.dao.PurchaseRecMapper" >
+  <resultMap id="BaseResultMap" type="com.rolin.entity.PurchaseRec" >
+    <id column="purchase_rec_id" property="purchaseRecId" jdbcType="INTEGER" />
+    <result column="purchase_time" property="purchaseTime" jdbcType="TIMESTAMP" />
+    <result column="purchase_price" property="purchasePrice" jdbcType="REAL" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    purchase_rec_id, purchase_time, purchase_price, goods_id, user_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from purchase_rec
+    where purchase_rec_id = #{purchaseRecId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from purchase_rec
+    where purchase_rec_id = #{purchaseRecId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rolin.entity.PurchaseRec" >
+    insert into purchase_rec (purchase_rec_id, purchase_time, purchase_price, 
+      goods_id, user_id)
+    values (#{purchaseRecId,jdbcType=INTEGER}, #{purchaseTime,jdbcType=TIMESTAMP}, #{purchasePrice,jdbcType=REAL}, 
+      #{goodsId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rolin.entity.PurchaseRec" >
+    insert into purchase_rec
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="purchaseRecId != null" >
+        purchase_rec_id,
+      </if>
+      <if test="purchaseTime != null" >
+        purchase_time,
+      </if>
+      <if test="purchasePrice != null" >
+        purchase_price,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="purchaseRecId != null" >
+        #{purchaseRecId,jdbcType=INTEGER},
+      </if>
+      <if test="purchaseTime != null" >
+        #{purchaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purchasePrice != null" >
+        #{purchasePrice,jdbcType=REAL},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rolin.entity.PurchaseRec" >
+    update purchase_rec
+    <set >
+      <if test="purchaseTime != null" >
+        purchase_time = #{purchaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purchasePrice != null" >
+        purchase_price = #{purchasePrice,jdbcType=REAL},
+      </if>
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where purchase_rec_id = #{purchaseRecId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rolin.entity.PurchaseRec" >
+    update purchase_rec
+    set purchase_time = #{purchaseTime,jdbcType=TIMESTAMP},
+      purchase_price = #{purchasePrice,jdbcType=REAL},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER}
+    where purchase_rec_id = #{purchaseRecId,jdbcType=INTEGER}
+  </update>
+</mapper>

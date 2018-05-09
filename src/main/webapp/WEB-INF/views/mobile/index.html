@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+    <title>若邻</title>
+
+    <link rel="stylesheet" href="/css/framework7.min.css">
+    <link rel="stylesheet" href="/css/icons.css">
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+<div id="app" class="color-theme-orange">
+    <!-- Status bar overlay for fullscreen mode-->
+    <div class="statusbar"></div>
+    <!-- Views/Tabs container -->
+    <div class="views tabs ios-edges">
+        <!-- Tabbar for switching views-tabs -->
+        <div class="toolbar tabbar-labels toolbar-bottom-md no-shadow no-hairline" id="home-toolbar">
+            <div class="toolbar-inner">
+                <a href="#view-home" class="tab-link tab-link-active">
+                    <i class="icon f7-icons ios-only">home</i>
+                    <i class="icon f7-icons ios-only icon-ios-fill">home_fill</i>
+                    <i class="icon material-icons md-only">home</i>
+                    <span class="tabbar-label">若邻</span>
+                </a>
+                <a href="#view-moment" class="tab-link">
+                    <i class="icon f7-icons ios-only">compass</i>
+                    <i class="icon f7-icons ios-only icon-ios-fill">compass_fill</i>
+                    <i class="icon material-icons md-only">explore</i>
+                    <span class="tabbar-label">附近/关注</span>
+                </a>
+                <a href="#view-cart" class="tab-link">
+                    <i class="icon f7-icons ios-only">bag</i>
+                    <i class="icon f7-icons ios-only icon-ios-fill">bag_fill</i>
+                    <i class="icon material-icons md-only">shopping_cart</i>
+                    <span class="tabbar-label">购物车</span>
+                </a>
+                <a href="#view-user" class="tab-link" id="user-tab">
+                    <i class="icon f7-icons ios-only">person</i>
+                    <i class="icon f7-icons ios-only icon-ios-fill">person_fill</i>
+                    <i class="icon material-icons md-only">account_circle</i>
+                    <span class="tabbar-label">我的</span>
+                </a>
+            </div>
+        </div>
+        <!-- Your main view/tab, should have "view-main" class. It also has "tab-active" class -->
+        <div id="view-home" class="view view-main tab tab-active">
+            <!-- Page, data-name contains page name which can be used in page callbacks -->
+            <div class="page" data-name="home">
+                <!-- Top Navbar -->
+                <div class="navbar no-hairline no-shadow">
+                    <div class="navbar-inner">
+                        <div class="left">
+                            <a href="#" class="link icon-only popup-open" data-popup="#navigation-popup">
+                                <i class="icon f7-icons ios-only">search</i>
+                                <i class="icon material-icons md-only">search</i>
+                            </a>
+                        </div>
+                        <div class="title sliding">shop name</div>
+                        <div class="right">
+                            <a href="#" class="bar-actions icon-only link">
+                                <i class="icon f7-icons ios-only">more_vertical</i>
+                                <i class="icon material-icons md-only">smore_vert</i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scrollable page content-->
+                <div class="page-content">
+                    <div class="swiper-container swiper-init home-swiper" data-pagination='{"el": ".swiper-pagination"}' data-autoplay='{"delay" :"3000"}'>
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="http://iph.href.lu/414x120?text=...&fg=ffffff&bg=eeeeee">
+                            </div>
+                            <div class="swiper-slide">Slide 2</div>
+                            <div class="swiper-slide">Slide 3</div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+
+                    <div class="block introduction">
+                        <p>shop name</p>
+                        <p>Each tab/view may have different layout, different navbar type (dynamic, fixed or static) or without navbar like this tab.</p>
+                    </div>
+
+                    <div class="block">
+                        <p class="segmented segmented-round">
+                            <button class="button button-round button-outline">热门推荐</button>
+                            <button class="button button-round button-outline">全部商品</button>
+                            <button class="button button-round button-outline">最新上市</button>
+                            <button class="button button-round button-outline">商品分类</button>
+                        </p>
+                    </div>
+
+                    <div class="block-title">店铺活动</div>
+                    <div class="card activity-card-header-pic" >
+                        <a href="/activity/123">
+                            <div style="background-image:url(http://iph.href.lu/1000x600?text=&fg=ffffff&bg=ddd)" class="card-header align-items-flex-end">活动标题</div>
+                            <div class="card-content card-content-padding">
+                                <p class="date">活动时间：2017.12.01-21.31</p>
+                                <p>活动详情介绍</p>
+                            </div>
+                        </a>
+                        <div class="card-footer">
+                            <a href="#" class="link icon-only link-active">
+                                <i class="icon f7-icons ios-only">start</i>
+                                <i class="icon material-icons md-only">favorite_border</i>
+                            </a>
+                            <a href="#" class="link icon-only link-active">
+                                <i class="icon f7-icons ios-only">share</i>
+                                <i class="icon material-icons md-only">share</i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card activity-card-header-pic">
+                        <div style="background-image:url(http://iph.href.lu/1000x600?text=&fg=ffffff&bg=ddd)" class="card-header align-items-flex-end">活动标题</div>
+                        <div class="card-content card-content-padding">
+                            <p class="date">活动时间：2017.12.01-21.31</p>
+                            <p>活动详情介绍</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="link icon-only link-active">
+                                <i class="icon f7-icons ios-only">start</i>
+                                <i class="icon material-icons md-only">favorite_border</i>
+                            </a>
+                            <a href="#" class="link icon-only link-active">
+                                <i class="icon f7-icons ios-only">share</i>
+                                <i class="icon material-icons md-only">share</i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="block goods-cards-block">
+                        <div class="block-title goods-cards-block-title">个性推荐</div>
+                        <div class="row no-gap">
+                            <div class="col-50">
+                                <a class="goods-card-link" href="/goods/123">
+                                    <div class="goods-card card activity-card-header-pic">
+                                        <div style="background-image:url(http://iph.href.lu/600x500?text=&fg=ffffff&bg=ddd)" class="card-header align-items-flex-end"></div>
+                                        <div class="goods-card-content card-content card-content-padding">
+                                            <p>商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</p>
+                                            <p>￥100</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-50">
+                                <a class="goods-card-link" href="/goods/123">
+                                    <div class="goods-card card activity-card-header-pic">
+                                        <div style="background-image:url(http://iph.href.lu/600x500?text=&fg=ffffff&bg=ddd)" class="card-header align-items-flex-end"></div>
+                                        <div class="goods-card-content card-content card-content-padding">
+                                            <p>商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</p>
+                                            <p>￥100</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-50">
+                                <a class="goods-card-link" href="/goods/123">
+                                    <div class="goods-card card activity-card-header-pic">
+                                        <div style="background-image:url(http://iph.href.lu/600x500?text=&fg=ffffff&bg=ddd)" class="card-header align-items-flex-end"></div>
+                                        <div class="goods-card-content card-content card-content-padding">
+                                            <p>商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</p>
+                                            <p>￥100</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-50">
+                                <a class="goods-card-link" href="/goods/123">
+                                    <div class="goods-card card activity-card-header-pic">
+                                        <div style="background-image:url(http://iph.href.lu/600x500?text=&fg=ffffff&bg=ddd)" class="card-header align-items-flex-end"></div>
+                                        <div class="goods-card-content card-content card-content-padding">
+                                            <p>商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</p>
+                                            <p>￥100</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-50">
+                                <a class="goods-card-link" href="/goods/123">
+                                    <div class="goods-card card activity-card-header-pic">
+                                        <div style="background-image:url(http://iph.href.lu/600x500?text=&fg=ffffff&bg=ddd)" class="card-header align-items-flex-end"></div>
+                                        <div class="goods-card-content card-content card-content-padding">
+                                            <p>商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</p>
+                                            <p>￥100</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-50">
+                                <a class="goods-card-link" href="/goods/123">
+                                    <div class="goods-card card activity-card-header-pic">
+                                        <div style="background-image:url(http://iph.href.lu/600x500?text=&fg=ffffff&bg=ddd)" class="card-header align-items-flex-end"></div>
+                                        <div class="goods-card-content card-content card-content-padding">
+                                            <p>商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</p>
+                                            <p>￥100</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-50">
+                                <a class="goods-card-link" href="/goods/123">
+                                    <div class="goods-card card activity-card-header-pic">
+                                        <div style="background-image:url(http://iph.href.lu/600x500?text=&fg=ffffff&bg=ddd)" class="card-header align-items-flex-end"></div>
+                                        <div class="goods-card-content card-content card-content-padding">
+                                            <p>商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</p>
+                                            <p>￥100</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-50">
+                                <a class="goods-card-link" href="/goods/123">
+                                    <div class="goods-card card activity-card-header-pic">
+                                        <div style="background-image:url(http://iph.href.lu/600x500?text=&fg=ffffff&bg=ddd)" class="card-header align-items-flex-end"></div>
+                                        <div class="goods-card-content card-content card-content-padding">
+                                            <p>商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</p>
+                                            <p>￥100</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Views -->
+        <div id="view-moment" class="view tab"></div>
+        <div id="view-cart" class="view tab"></div>
+        <div id="view-user" class="view tab"></div>
+    </div>
+
+    <!-- Popup -->
+    <div class="popup" id="search-popup">
+        <div class="view">
+            <div class="page">
+                <form class="searchbar ios-only no-hairline">
+                    <div class="searchbar-inner">
+                        <div class="left searchbar-back">
+                            <a href="#" class="link icon-only popup-close">
+                                <i class="icon f7-icons ios-only">arrow_left</i>
+                                <i class="icon material-icons md-only">arrow_back</i>
+                            </a>
+                        </div>
+                        <div class="searchbar-input-wrap">
+                            <input type="search" placeholder="搜索店铺商品">
+                            <i class="searchbar-icon "></i>
+                            <span class="input-clear-button"></span>
+                        </div>
+                        <span class="searchbar-disable-button ios-only">取消</span>
+                    </div>
+                </form>
+                <form class="searchbar md-only no-shadow">
+                    <div class="searchbar-inner md-searchbar-inner">
+                        <div class="left searchbar-back">
+                            <a href="#" class="link icon-only popup-close">
+                                <i class="icon f7-icons ios-only">arrow_left</i>
+                                <i class="icon material-icons md-only">arrow_back</i>
+                            </a>
+                        </div>
+                        <div class="searchbar-input-wrap md-searchbar-input-wrap">
+                            <input type="search" placeholder="搜索附件店铺" class="md-searchbar-input">
+                            <span class="input-clear-button"></span>
+                        </div>
+                    </div>
+                </form>
+                <div class="page-content">
+                    <!-- Searchbar backdrop -->
+                    <div class="searchbar-backdrop"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popup" id="navigation-popup">
+        <div class="view">
+            <div class="page">
+                <form class="searchbar ios-only no-hairline">
+                    <div class="searchbar-inner">
+                        <div class="left searchbar-back">
+                            <a href="#" class="link icon-only popup-close">
+                                <i class="icon f7-icons ios-only">arrow_left</i>
+                                <i class="icon material-icons md-only">arrow_back</i>
+                            </a>
+                        </div>
+                        <div class="searchbar-input-wrap">
+                            <input type="search" placeholder="搜索附件店铺">
+                            <i class="searchbar-icon "></i>
+                            <span class="input-clear-button"></span>
+                        </div>
+                        <span class="searchbar-disable-button ios-only">取消</span>
+                    </div>
+                </form>
+                <form class="searchbar md-only no-shadow">
+                    <div class="searchbar-inner md-searchbar-inner">
+                        <div class="left searchbar-back">
+                            <a href="#" class="link icon-only popup-close">
+                                <i class="icon f7-icons ios-only">arrow_left</i>
+                                <i class="icon material-icons md-only">arrow_back</i>
+                            </a>
+                        </div>
+                        <div class="searchbar-input-wrap md-searchbar-input-wrap">
+                            <input type="search" placeholder="搜索附件店铺" class="md-searchbar-input">
+                            <span class="input-clear-button"></span>
+                        </div>
+                    </div>
+                </form>
+                <div class="page-content">
+                    <!-- Searchbar backdrop -->
+                    <div class="searchbar-backdrop"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Framework7 library -->
+<script src="/js/framework7-will.js"></script>
+
+<!-- App routes -->
+<script src="/js/routes.js"></script>
+
+<!-- Your custom app scripts -->
+<script src="/js/app.js"></script>
+<script src="http://webapi.amap.com/maps?v=1.4.6&key=8af7577d37f9c22c9ba3f8dad04d0b54"></script>
+</body>
+</html>

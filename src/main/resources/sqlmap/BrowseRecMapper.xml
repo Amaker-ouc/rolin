@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rolin.dao.BrowseRecMapper" >
+  <resultMap id="BaseResultMap" type="com.rolin.entity.BrowseRec" >
+    <id column="browse_rec_id" property="browseRecId" jdbcType="INTEGER" />
+    <result column="browse_in_time" property="browseInTime" jdbcType="TIMESTAMP" />
+    <result column="browse_out_time" property="browseOutTime" jdbcType="TIMESTAMP" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    browse_rec_id, browse_in_time, browse_out_time, goods_id, user_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from browse_rec
+    where browse_rec_id = #{browseRecId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from browse_rec
+    where browse_rec_id = #{browseRecId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rolin.entity.BrowseRec" >
+    insert into browse_rec (browse_rec_id, browse_in_time, browse_out_time, 
+      goods_id, user_id)
+    values (#{browseRecId,jdbcType=INTEGER}, #{browseInTime,jdbcType=TIMESTAMP}, #{browseOutTime,jdbcType=TIMESTAMP}, 
+      #{goodsId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rolin.entity.BrowseRec" >
+    insert into browse_rec
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="browseRecId != null" >
+        browse_rec_id,
+      </if>
+      <if test="browseInTime != null" >
+        browse_in_time,
+      </if>
+      <if test="browseOutTime != null" >
+        browse_out_time,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="browseRecId != null" >
+        #{browseRecId,jdbcType=INTEGER},
+      </if>
+      <if test="browseInTime != null" >
+        #{browseInTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="browseOutTime != null" >
+        #{browseOutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rolin.entity.BrowseRec" >
+    update browse_rec
+    <set >
+      <if test="browseInTime != null" >
+        browse_in_time = #{browseInTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="browseOutTime != null" >
+        browse_out_time = #{browseOutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where browse_rec_id = #{browseRecId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rolin.entity.BrowseRec" >
+    update browse_rec
+    set browse_in_time = #{browseInTime,jdbcType=TIMESTAMP},
+      browse_out_time = #{browseOutTime,jdbcType=TIMESTAMP},
+      goods_id = #{goodsId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER}
+    where browse_rec_id = #{browseRecId,jdbcType=INTEGER}
+  </update>
+</mapper>

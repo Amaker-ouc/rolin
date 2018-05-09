@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rolin.dao.ShopScrollImgMapper" >
+  <resultMap id="BaseResultMap" type="com.rolin.entity.ShopScrollImg" >
+    <id column="shop_scroll_img_id" property="shopScrollImgId" jdbcType="INTEGER" />
+    <result column="shop_id" property="shopId" jdbcType="INTEGER" />
+    <result column="img_path" property="imgPath" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    shop_scroll_img_id, shop_id, img_path
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from shop_scroll_img
+    where shop_scroll_img_id = #{shopScrollImgId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByShopId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select img_path
+    from shop_scroll_img
+    where shop_id =#{shopId}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from shop_scroll_img
+    where shop_scroll_img_id = #{shopScrollImgId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rolin.entity.ShopScrollImg" >
+    insert into shop_scroll_img (shop_scroll_img_id, shop_id, img_path
+      )
+    values (#{shopScrollImgId,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{imgPath,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rolin.entity.ShopScrollImg" >
+    insert into shop_scroll_img
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shopScrollImgId != null" >
+        shop_scroll_img_id,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="imgPath != null" >
+        img_path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shopScrollImgId != null" >
+        #{shopScrollImgId,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="imgPath != null" >
+        #{imgPath,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rolin.entity.ShopScrollImg" >
+    update shop_scroll_img
+    <set >
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="imgPath != null" >
+        img_path = #{imgPath,jdbcType=CHAR},
+      </if>
+    </set>
+    where shop_scroll_img_id = #{shopScrollImgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rolin.entity.ShopScrollImg" >
+    update shop_scroll_img
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      img_path = #{imgPath,jdbcType=CHAR}
+    where shop_scroll_img_id = #{shopScrollImgId,jdbcType=INTEGER}
+  </update>
+</mapper>

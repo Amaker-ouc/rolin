@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rolin.dao.ShopCatMapper" >
+  <resultMap id="BaseResultMap" type="com.rolin.entity.ShopCat" >
+    <id column="shop_cat_name" property="shopCatName" jdbcType="CHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from shop_cat
+    where shop_cat_name = #{shopCatName,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.rolin.entity.ShopCat" >
+    insert into shop_cat (shop_cat_name)
+    values (#{shopCatName,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rolin.entity.ShopCat" >
+    insert into shop_cat
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shopCatName != null" >
+        shop_cat_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shopCatName != null" >
+        #{shopCatName,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

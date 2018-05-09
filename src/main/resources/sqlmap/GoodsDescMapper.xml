@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rolin.dao.GoodsDescMapper" >
+  <resultMap id="BaseResultMap" type="com.rolin.entity.GoodsDesc" >
+    <id column="desc_id" property="descId" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="goods_desc_pic" property="goodsDescPic" jdbcType="CHAR" />
+    <result column="goods_desc_text" property="goodsDescText" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    desc_id, goods_id, goods_desc_pic, goods_desc_text
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods_desc
+    where desc_id = #{descId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goods_desc
+    where desc_id = #{descId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rolin.entity.GoodsDesc" >
+    insert into goods_desc (desc_id, goods_id, goods_desc_pic, 
+      goods_desc_text)
+    values (#{descId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{goodsDescPic,jdbcType=CHAR}, 
+      #{goodsDescText,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rolin.entity.GoodsDesc" >
+    insert into goods_desc
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="descId != null" >
+        desc_id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="goodsDescPic != null" >
+        goods_desc_pic,
+      </if>
+      <if test="goodsDescText != null" >
+        goods_desc_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="descId != null" >
+        #{descId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsDescPic != null" >
+        #{goodsDescPic,jdbcType=CHAR},
+      </if>
+      <if test="goodsDescText != null" >
+        #{goodsDescText,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rolin.entity.GoodsDesc" >
+    update goods_desc
+    <set >
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsDescPic != null" >
+        goods_desc_pic = #{goodsDescPic,jdbcType=CHAR},
+      </if>
+      <if test="goodsDescText != null" >
+        goods_desc_text = #{goodsDescText,jdbcType=CHAR},
+      </if>
+    </set>
+    where desc_id = #{descId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rolin.entity.GoodsDesc" >
+    update goods_desc
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      goods_desc_pic = #{goodsDescPic,jdbcType=CHAR},
+      goods_desc_text = #{goodsDescText,jdbcType=CHAR}
+    where desc_id = #{descId,jdbcType=INTEGER}
+  </update>
+</mapper>
