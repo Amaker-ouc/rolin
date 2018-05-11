@@ -15,6 +15,11 @@
     from cart
     where cart_id = #{cartId,jdbcType=INTEGER}
   </select>
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select *
+    from cart
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from cart
     where cart_id = #{cartId,jdbcType=INTEGER}

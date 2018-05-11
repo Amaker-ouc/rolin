@@ -15,6 +15,11 @@
     from goods_col
     where col_id = #{colId,jdbcType=INTEGER}
   </select>
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select goods_id
+    from goods_col
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from goods_col
     where col_id = #{colId,jdbcType=INTEGER}
