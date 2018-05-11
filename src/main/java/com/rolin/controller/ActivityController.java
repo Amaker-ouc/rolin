@@ -35,7 +35,7 @@ public class ActivityController {
     private static GoodsMapper goodsMapper;
     private static ApplicationContext applicationContext;
     static {
-        applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml");//����spring�����ļ�
+        applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml");
         shopActGoodsMapper = applicationContext.getBean(ShopActGoodsMapper.class);
         shopActMapper = applicationContext.getBean(ShopActMapper.class);
         goodsMapper = applicationContext.getBean(GoodsMapper.class);
