@@ -12,6 +12,7 @@ import com.rolin.entity.Shop;
 import com.rolin.entity.ShopDetail;
 import com.rolin.utils.CheckMobile;
 import com.rolin.utils.DataResponse;
+import com.rolin.utils.ShopLocation;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.context.ApplicationContext;
@@ -53,11 +54,11 @@ public class ShopController {
     @ResponseBody
     @RequestMapping(value="/detail",method= RequestMethod.POST,produces = "application/json; charset=utf-8")
     public String shopDetail(HttpServletRequest request) throws Exception {
-        String lng = request.getParameter("lng");
-        String lat = request.getParameter("lat");
+        Double lng = Double.parseDouble(request.getParameter("lng"));
+        Double lat = Double.parseDouble(request.getParameter("lat"));
         DataResponse dataResponse = new DataResponse();
         try {
-            Integer shopId = getShopId(lng,lat);
+            Integer shopId = ShopLocation.getShopId(lng,lat);
             if(shopId==null){
                 dataResponse.setCode(200);
                 dataResponse.setMsg("附近没有店铺");
@@ -89,10 +90,6 @@ public class ShopController {
         }
 
 
-    }
-    private Integer getShopId(String lng,String lat){
-        int id=1;
-        return 2;
     }
 
     @RequestMapping(value = "/goods",method = RequestMethod.POST,produces = "application/json; charset=utf-8")

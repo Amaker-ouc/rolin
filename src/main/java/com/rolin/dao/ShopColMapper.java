@@ -2,6 +2,8 @@ package com.rolin.dao;
 
 import com.rolin.entity.ShopCol;
 
+import java.util.ArrayList;
+
 public interface ShopColMapper {
     int deleteByPrimaryKey(Integer shopColId);
 
@@ -10,6 +12,8 @@ public interface ShopColMapper {
     int insertSelective(ShopCol record);
 
     ShopCol selectByPrimaryKey(Integer shopColId);
+
+    ArrayList<String> selectByUserId(Integer userId);
 
     int updateByPrimaryKeySelective(ShopCol record);
 
