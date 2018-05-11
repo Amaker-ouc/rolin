@@ -9,3 +9,9 @@
 out
 gen
 /target/
+/src/main/resources/generatorConfig.xml
+/src/main/resources/generator.properties
+/src/main/resources/jdbc.properties
+src/main/resources/generator.properties
+src/main/resources/generator.properties
+src/main/resources/jdbc.properties

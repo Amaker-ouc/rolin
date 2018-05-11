@@ -3,9 +3,11 @@ package com.rolin.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rolin.dao.GoodsMapper;
 import com.rolin.dao.ShopActMapper;
 import com.rolin.dao.ShopMapper;
 import com.rolin.dao.ShopScrollImgMapper;
+import com.rolin.entity.Goods;
 import com.rolin.entity.Shop;
 import com.rolin.entity.ShopDetail;
 import com.rolin.utils.CheckMobile;
@@ -22,18 +24,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+
 @RequestMapping("/shop")
 @Controller
 public class ShopController {
     private static ShopMapper shopMapper;
     private static ShopActMapper shopActMapper;
     private static ShopScrollImgMapper shopScrollImgMapper;
+    private static GoodsMapper goodsMapper;
     private static ApplicationContext applicationContext;
     static {
         applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml");//����spring�����ļ�
         shopMapper = applicationContext.getBean(ShopMapper.class);
         shopActMapper = applicationContext.getBean(ShopActMapper.class);
         shopScrollImgMapper = applicationContext.getBean(ShopScrollImgMapper.class);
+        goodsMapper = applicationContext.getBean(GoodsMapper.class);
     }
 
     @RequestMapping(value="/{shopId}",method= RequestMethod.GET)
@@ -83,10 +89,41 @@ public class ShopController {
         }
 
 
-
     }
     private Integer getShopId(String lng,String lat){
         int id=1;
         return 2;
     }
+
+    @RequestMapping(value = "/goods",method = RequestMethod.POST,produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String shopGoods(HttpServletRequest request) throws Exception {
+        Integer shopId=Integer.parseInt(request.getParameter("shopId"));
+        Integer page=Integer.parseInt(request.getParameter("page"));
+        DataResponse dataResponse = new DataResponse();
+        try {
+            if(shopId==null){
+                dataResponse.setCode(200);
+                dataResponse.setMsg("附近没有店铺");
+            }
+            else {
+                ArrayList<Goods> goodsArrayList = goodsMapper.selectByShopId(shopId, page*8);
+                dataResponse.setData(goodsArrayList);
+            }
+            JSONArray jsonArray = JSONArray.fromObject(dataResponse);
+            String str = jsonArray.toString();
+            System.out.println(str);
+            return str;
+        }
+        catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            dataResponse.setCode(200);
+            dataResponse.setMsg("服务器错误");
+            JSONObject jsonObject = JSONObject.fromObject(dataResponse);
+            String str = jsonObject.toString();
+            System.out.println(str);
+            return str;
+        }
+    }
+
 }
