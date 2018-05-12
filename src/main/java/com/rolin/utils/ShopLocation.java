@@ -2,6 +2,7 @@ package com.rolin.utils;
 
 import com.rolin.dao.ShopMapper;
 import com.rolin.entity.Shop;
+import net.sf.json.JSONArray;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -14,7 +15,9 @@ public class ShopLocation {
     }
     public static int getShopId(Double lng,Double lat){
         Shop shop = shopMapper.selectByLocation(lng,lat);
-        System.out.println(shop.getShopId());
+        JSONArray jsonArray = JSONArray.fromObject(shop);
+        String str = jsonArray.toString();
+        System.out.println(str);
         return shop.getShopId();
     }
 }
