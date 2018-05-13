@@ -11,19 +11,14 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController {
     @RequestMapping("/")
-    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ModelAndView getIndex() throws Exception {
         ModelAndView mav = new ModelAndView("mobile/index");
-        //mav.addObject("title", "shopManage");
         return mav;
-//        if(CheckMobile.check(request)) {
-//            ModelAndView mav = new ModelAndView("mobile/index");
-//            mav.addObject("title", "shopManage");
-//            return mav;
-//        }
-//        else{
-//            ModelAndView mav = new ModelAndView("pc/shop/index");
-//            mav.addObject("title", "shopManage");
-//            return mav;
-//        }
+    }
+
+    @RequestMapping("/home")
+    public ModelAndView getHome() throws Exception {
+        ModelAndView mav = new ModelAndView("mobile/home");
+        return mav;
     }
 }

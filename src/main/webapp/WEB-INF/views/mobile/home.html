@@ -1,0 +1,171 @@
+<div class="page" data-name="home">
+    <!-- Top Navbar -->
+    <div class="navbar no-hairline no-shadow">
+        <div class="navbar-inner">
+            <div class="left">
+                <a href="#" class="link icon-only popup-open" data-popup="#navigation-popup">
+                    <i class="icon f7-icons ios-only">search</i>
+                    <i class="icon material-icons md-only">search</i>
+                </a>
+            </div>
+            <div class="title sliding">shop name</div>
+            <div class="right">
+                <a href="#" class="bar-actions icon-only link">
+                    <i class="icon f7-icons ios-only">more_vertical</i>
+                    <i class="icon material-icons md-only">smore_vert</i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scrollable page content-->
+    <div class="page-content ptr-content infinite-scroll-content" data-ptr-distance="55">
+        <!-- Default pull to refresh preloader-->
+        <div class="ptr-preloader">
+            <div class="preloader"></div>
+            <div class="ptr-arrow"></div>
+        </div>
+        <div class="swiper-container swiper-init home-swiper" data-pagination='{"el": ".swiper-pagination"}' data-autoplay='{"delay" :"3000"}'>
+            <div class="swiper-wrapper" id="swiper-wrapper">
+                {{#each scrollImgs}}
+                <div class="swiper-slide">
+                    <img src="{{this.imgPath}}">
+                </div>
+                {{/each}}
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+
+        <div class="block introduction">
+            <p>{{shopName}}</p>
+            <p>{{desText}}</p>
+        </div>
+
+        <div class="block">
+            <p class="segmented segmented-round">
+                <button class="button button-round button-outline">热门推荐</button>
+                <button class="button button-round button-outline">全部商品</button>
+                <button class="button button-round button-outline">最新上市</button>
+                <button class="button button-round button-outline">商品分类</button>
+            </p>
+        </div>
+
+        <div class="block-title">店铺活动</div>
+        {{#each acts}}
+        <div class="card activity-card-header-pic" >
+            <a href="/activity/123">
+                <div style="background-image:url({{this.actImg}})" class="card-header align-items-flex-end"></div>
+                <div class="card-content card-content-padding">
+                    <p class="date">活动时间：2018.{{this.beginTime.month}}.{{this.beginTime.day}}-{{this.endTime.month}}.{{this.endTime.day}}</p>
+                    <p>{{this.actDes}}</p>
+                </div>
+            </a>
+            <div class="card-footer">
+                <a href="#" class="link icon-only link-active">
+                    <i class="icon f7-icons ios-only">start</i>
+                    <i class="icon material-icons md-only">favorite_border</i>
+                </a>
+                <a href="#" class="link icon-only link-active">
+                    <i class="icon f7-icons ios-only">share</i>
+                    <i class="icon material-icons md-only">share</i>
+                </a>
+            </div>
+        </div>
+        {{/each}}
+
+        <div class="block goods-cards-block">
+            <div class="block-title goods-cards-block-title">个性推荐</div>
+            <div class="row no-gap">
+                <div class="col-50">
+                    <a class="goods-card-link" href="/goods/123">
+                        <div class="goods-card card activity-card-header-pic">
+                            <div style="background-image:url(http://iph.href.lu/600x500?text=&fg=ffffff&bg=ddd)" class="card-header align-items-flex-end"></div>
+                            <div class="goods-card-content card-content card-content-padding">
+                                <p>商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</p>
+                                <p>￥100</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-50">
+                    <a class="goods-card-link" href="/goods/123">
+                        <div class="goods-card card activity-card-header-pic">
+                            <div style="background-image:url(http://iph.href.lu/600x500?text=&fg=ffffff&bg=ddd)" class="card-header align-items-flex-end"></div>
+                            <div class="goods-card-content card-content card-content-padding">
+                                <p>商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</p>
+                                <p>￥100</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-50">
+                    <a class="goods-card-link" href="/goods/123">
+                        <div class="goods-card card activity-card-header-pic">
+                            <div style="background-image:url(http://iph.href.lu/600x500?text=&fg=ffffff&bg=ddd)" class="card-header align-items-flex-end"></div>
+                            <div class="goods-card-content card-content card-content-padding">
+                                <p>商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</p>
+                                <p>￥100</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-50">
+                    <a class="goods-card-link" href="/goods/123">
+                        <div class="goods-card card activity-card-header-pic">
+                            <div style="background-image:url(http://iph.href.lu/600x500?text=&fg=ffffff&bg=ddd)" class="card-header align-items-flex-end"></div>
+                            <div class="goods-card-content card-content card-content-padding">
+                                <p>商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</p>
+                                <p>￥100</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-50">
+                    <a class="goods-card-link" href="/goods/123">
+                        <div class="goods-card card activity-card-header-pic">
+                            <div style="background-image:url(http://iph.href.lu/600x500?text=&fg=ffffff&bg=ddd)" class="card-header align-items-flex-end"></div>
+                            <div class="goods-card-content card-content card-content-padding">
+                                <p>商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</p>
+                                <p>￥100</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-50">
+                    <a class="goods-card-link" href="/goods/123">
+                        <div class="goods-card card activity-card-header-pic">
+                            <div style="background-image:url(http://iph.href.lu/600x500?text=&fg=ffffff&bg=ddd)" class="card-header align-items-flex-end"></div>
+                            <div class="goods-card-content card-content card-content-padding">
+                                <p>商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</p>
+                                <p>￥100</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-50">
+                    <a class="goods-card-link" href="/goods/123">
+                        <div class="goods-card card activity-card-header-pic">
+                            <div style="background-image:url(http://iph.href.lu/600x500?text=&fg=ffffff&bg=ddd)" class="card-header align-items-flex-end"></div>
+                            <div class="goods-card-content card-content card-content-padding">
+                                <p>商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</p>
+                                <p>￥100</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-50">
+                    <a class="goods-card-link" href="/goods/123">
+                        <div class="goods-card card activity-card-header-pic">
+                            <div style="background-image:url(http://iph.href.lu/600x500?text=&fg=ffffff&bg=ddd)" class="card-header align-items-flex-end"></div>
+                            <div class="goods-card-content card-content card-content-padding">
+                                <p>商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</p>
+                                <p>￥100</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="preloader infinite-scroll-preloader"></div>
+    </div>
+</div>

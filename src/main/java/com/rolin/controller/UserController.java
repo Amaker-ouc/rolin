@@ -39,7 +39,6 @@ public class UserController {
     }
     @RequestMapping("/")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        System.out.println("/user");
         ModelAndView mav = new ModelAndView("mobile/user");
         //mav.addObject("title", "shopManage");
         return mav;
