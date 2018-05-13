@@ -126,11 +126,11 @@ public class ShopController {
                 dataResponse.setMsg("附近没有店铺");
             }
             else {
-                ArrayList<Goods> goodsArrayList = goodsMapper.selectByShopId(shopId, page*8);
+                ArrayList<Goods> goodsArrayList = goodsMapper.selectByShopId(shopId, page*6);
                 dataResponse.setData(goodsArrayList);
             }
-            JSONArray jsonArray = JSONArray.fromObject(dataResponse);
-            String str = jsonArray.toString();
+            JSONObject jsonObject = JSONObject.fromObject(dataResponse);
+            String str = jsonObject.toString();
             System.out.println(str);
             return str;
         }

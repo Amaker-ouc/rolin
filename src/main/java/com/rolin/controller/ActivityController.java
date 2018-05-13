@@ -64,8 +64,8 @@ public class ActivityController {
             activityDetail.setShopAct(shopAct);
             activityDetail.setGoodsArrayList(goodsArrayList);
             dataResponse.setData(activityDetail);
-            JSONArray jsonArray = JSONArray.fromObject(dataResponse);
-            String str = jsonArray.toString();
+            JSONObject jsonObject = JSONObject.fromObject(dataResponse);
+            String str = jsonObject.toString();
             System.out.println(str);
             return str;
         } catch (Exception e) {

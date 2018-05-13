@@ -13,4 +13,9 @@ gen
 /src/main/resources/generator.properties
 /src/main/resources/jdbc.properties
 
+<<<<<<< HEAD
+src/main/resources/generator.properties
+src/main/resources/jdbc.properties
+=======
+>>>>>>> 3ee66f4813c3aa060dfe6a646a0742d83d025d4e
 *.properties

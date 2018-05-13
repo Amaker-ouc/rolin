@@ -17,11 +17,11 @@ routes = [
                     toastBottom.open();
                 }
                 else {
-                    app.data.shop=data.data;
+                    app.data.shop=data.data.shop;
                     app.data.shop['homeGoodsPage']=0;
                     //获取商品列表
                     app.request.post('/shop/goods',{
-                        shopId:data.data.shopId,
+                        shopId:data.data.shop.shopId,
                         page:0
                     },function (dataGoods) {
                         app.preloader.hide();
@@ -40,9 +40,10 @@ routes = [
                                 {
                                     context: {
                                         scrollImgs:data.data.scrollImgs,
-                                        shopName:data.data.shopName,
-                                        desText:data.data.desText,
+                                        shopName:data.data.shop.shopName,
+                                        desText:data.data.shop.desText,
                                         acts:data.data.acts,
+                                        goods:dataGoods.data,
                                     }
                                 }
                             );
