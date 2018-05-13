@@ -22,7 +22,7 @@
     select *
     from goods
     where shop_id = #{shopId}
-    limit #{page},2
+    limit #{page},6
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from goods

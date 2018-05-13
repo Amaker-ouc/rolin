@@ -126,7 +126,7 @@ public class ShopController {
                 dataResponse.setMsg("附近没有店铺");
             }
             else {
-                ArrayList<Goods> goodsArrayList = goodsMapper.selectByShopId(shopId, page*8);
+                ArrayList<Goods> goodsArrayList = goodsMapper.selectByShopId(shopId, page*6);
                 dataResponse.setData(goodsArrayList);
             }
             JSONObject jsonObject = JSONObject.fromObject(dataResponse);
