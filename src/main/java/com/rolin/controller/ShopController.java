@@ -66,8 +66,7 @@ public class ShopController {
             else {
                 ShopDetail shopDetail = new ShopDetail();
                 Shop shop = shopMapper.selectByPrimaryKey(shopId);
-                shopDetail.setShopName(shop.getShopName());
-                shopDetail.setDesText(shop.getDesText());
+                shopDetail.setShop(shop);
                 shopDetail.setActs(shopActMapper.selectByShopId(shopId));
                 shopDetail.setScrollImgs(shopScrollImgMapper.selectByShopId(shopId));
                 dataResponse.setCode(0);
