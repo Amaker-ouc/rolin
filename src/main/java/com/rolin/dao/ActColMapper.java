@@ -2,6 +2,8 @@ package com.rolin.dao;
 
 import com.rolin.entity.ActCol;
 
+import java.util.ArrayList;
+
 public interface ActColMapper {
     int deleteByPrimaryKey(Integer actColId);
 
@@ -10,6 +12,8 @@ public interface ActColMapper {
     int insertSelective(ActCol record);
 
     ActCol selectByPrimaryKey(Integer actColId);
+
+    ArrayList<String> selectByUserId(Integer userId);
 
     int updateByPrimaryKeySelective(ActCol record);
 

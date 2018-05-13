@@ -4,20 +4,19 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ShopDetail {
-    private String shopName;
+
+    private Shop shop;
 
     private ArrayList<String> scrollImgs;
 
-    private String desText;
-
     private ArrayList<ShopAct> acts;
 
-    public String getShopName() {
-        return shopName;
+    public Shop getShop() {
+        return shop;
     }
 
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 
     public ArrayList<String> getScrollImgs() {
@@ -28,13 +27,6 @@ public class ShopDetail {
         this.scrollImgs = scrollImgs;
     }
 
-    public String getDesText() {
-        return desText;
-    }
-
-    public void setDesText(String desText) {
-        this.desText = desText;
-    }
 
     public ArrayList<ShopAct> getActs() {
         return acts;
