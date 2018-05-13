@@ -15,6 +15,8 @@ import com.rolin.utils.DataResponse;
 import com.rolin.utils.ShopLocation;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.processors.JsonValueProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -25,7 +27,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 @RequestMapping("/shop")
 @Controller
@@ -36,7 +41,7 @@ public class ShopController {
     private static GoodsMapper goodsMapper;
     private static ApplicationContext applicationContext;
     static {
-        applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml");//����spring�����ļ�
+        applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml");
         shopMapper = applicationContext.getBean(ShopMapper.class);
         shopActMapper = applicationContext.getBean(ShopActMapper.class);
         shopScrollImgMapper = applicationContext.getBean(ShopScrollImgMapper.class);
@@ -54,6 +59,7 @@ public class ShopController {
     @ResponseBody
     @RequestMapping(value="/detail",method= RequestMethod.POST,produces = "application/json; charset=utf-8")
     public String shopDetail(HttpServletRequest request) throws Exception {
+        System.out.println("/shop/detail");
         Double lng = Double.parseDouble(request.getParameter("lng"));
         Double lat = Double.parseDouble(request.getParameter("lat"));
         DataResponse dataResponse = new DataResponse();
@@ -74,8 +80,8 @@ public class ShopController {
                 dataResponse.setData(shopDetail);
 
             }
-            JSONArray jsonArray = JSONArray.fromObject(dataResponse);
-            String str = jsonArray.toString();
+            JSONObject jsonObject = JSONObject.fromObject(dataResponse);
+            String str = jsonObject.toString();
             System.out.println(str);
             return str;
         }
@@ -91,10 +97,27 @@ public class ShopController {
 
 
     }
+    public class JsonDateValueProcessor implements JsonValueProcessor {
+        private String format ="yyyy-MM-dd";
+        public Object processArrayValue(Object value, JsonConfig config) {
+            return process(value);
+        }
+        public Object processObjectValue(String key, Object value, JsonConfig config) {
+            return process(value);
+        }
+        private Object process(Object value){
+            if(value instanceof Date){
+                SimpleDateFormat sdf = new SimpleDateFormat(format,Locale.UK);
+                return sdf.format(value);
+            }
+            return value == null ? "" : value.toString();
+        }
+    }
 
     @RequestMapping(value = "/goods",method = RequestMethod.POST,produces = "application/json; charset=utf-8")
     @ResponseBody
     public String shopGoods(HttpServletRequest request) throws Exception {
+        System.out.println("/shop/goods");
         Integer shopId=Integer.parseInt(request.getParameter("shopId"));
         Integer page=Integer.parseInt(request.getParameter("page"));
         DataResponse dataResponse = new DataResponse();

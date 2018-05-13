@@ -1,11 +1,174 @@
 routes = [
     {
-        path: '/',
-        url: '/',
+        path: '/home/',
+        async: function (routeTo, routeFrom, resolve, reject) {
+            // Show Preloader
+            app.preloader.show();
+            //获取店铺详情
+            app.request.post('/shop/detail', {
+                lng: 1.0,
+                lat: 1.0
+            }, function (data) {
+                if (data.code !== 0) {
+                    var toastBottom = app.toast.create({
+                        text: data.msg,
+                        closeTimeout: 2000,
+                    });
+                    toastBottom.open();
+                }
+                else {
+                    app.data.shop=data.data;
+                    app.data.shop['homeGoodsPage']=0;
+                    //获取商品列表
+                    app.request.post('/shop/goods',{
+                        shopId:data.data.shopId,
+                        page:0
+                    },function (dataGoods) {
+                        app.preloader.hide();
+                        if(dataGoods.code!==0){
+                            var toastBottom = app.toast.create({
+                                text: data.msg,
+                                closeTimeout: 2000,
+                            });
+                            toastBottom.open();
+                        }
+                        else{
+                            resolve(
+                                {
+                                    templateUrl: './home',
+                                },
+                                {
+                                    context: {
+                                        scrollImgs:data.data.scrollImgs,
+                                        shopName:data.data.shopName,
+                                        desText:data.data.desText,
+                                        acts:data.data.acts,
+                                    }
+                                }
+                            );
+                        }
+                    },function (error) {
+                        app.preloader.hide();
+                        var toastBottom = app.toast.create({
+                            text: "出错，请重试",
+                            closeTimeout: 2000,
+                        });
+                        toastBottom.open();
+                    },"json");
+                }
+            }, function (error) {
+                app.preloader.hide();
+                var toastBottom = app.toast.create({
+                    text: "出错，请重试",
+                    closeTimeout: 2000,
+                });
+                toastBottom.open();
+            }, "json");
+        },
+        on:{
+            pageAfterIn:function(){
+                var $ptrContent = $$('.ptr-content');
+                $ptrContent.on('ptr:refresh', function (e) {
+                    homeView.router.refreshPage();
+                    app.ptr.done()
+                });
+            }
+        }
     },
     {
         path: '/user/',
         templateUrl: './user/',
+        on:{
+            pageInit:function () {
+            },
+            pageAfterIn:function () {
+                $$('#register-button').on('click',function () {
+                    app.preloader.show();
+                    var formData=app.form.convertToData('#register-form');
+                    if(formData.username===""||formData.password1===""||formData.password2===""){
+                        var toastBottom = app.toast.create({
+                            text: '输入出错，请修改',
+                            closeTimeout: 2000,
+                        });
+                        toastBottom.open();
+                        app.preloader.hide();
+                    }
+                    else if(formData.password1!==formData.password2){
+                        var toastBottom = app.toast.create({
+                            text: '密码不匹配，请确认',
+                            closeTimeout: 2000,
+                        });
+                        toastBottom.open();
+                        app.preloader.hide();
+                    }
+                    else{
+                        app.request.post('/register',{username:formData.username,password1:formData.password1,password2:formData.password2},function (data) {
+                            app.preloader.hide();
+                            if(data.code!==0){
+                                var toastBottom = app.toast.create({
+                                    text: data.msg,
+                                    closeTimeout: 2000,
+                                });
+                                toastBottom.open();
+                            }
+                            else{
+                                $$('#login-popup').close();
+                                $root.user.userName=data.data.userName;
+                            }
+                        })
+                    }
+                });
+                $$('#login-button').on('click',function () {
+                    app.preloader.show();
+                    var formData=app.form.convertToData('#login-form');
+                    if(formData.username===""||formData.password===""){
+                        var toastBottom = app.toast.create({
+                            text: '输入出错，请修改',
+                            closeTimeout: 2000,
+                        });
+                        toastBottom.open();
+                        app.preloader.hide();
+                    }
+                    else{
+                        app.request.post('/login',{username:formData.username,password:formData.password},function (data) {
+                            app.preloader.hide();
+                            if(data.code!==0){
+                                var toastBottom = app.toast.create({
+                                    text: data.msg,
+                                    closeTimeout: 2000,
+                                });
+                                toastBottom.open();
+                            }
+                            else{
+                                app.loginScreen.close('#login-popup');
+                                var toastCenter = app.toast.create({
+                                    text: '登录成功',
+                                    position: 'center',
+                                    closeTimeout: 2000,
+                                });
+                                toastCenter.open();
+                                $$('#userName-p').text(data.data.userName);
+                                $$('#user-head-img').attr('src',data.data.head);
+                                app.data['user']=data.data;
+                                //只能存储字符串，如果需要存储对象，首先要转化为字符串。利用JSON.stringify()；
+                                window.localStorage.setItem("user",JSON.stringify(app.data.user));
+                            }
+                        },function (error) {
+                            app.preloader.hide();
+                            var toastBottom = app.toast.create({
+                                text:error.text,
+                                closeTimeout: 2000,
+                            });
+                            toastBottom.open();
+                        },"json");
+                    }
+                })
+                $$('.item-link').on('click',function () {
+                    //app.dialog.alert("click");
+                    //app.toolbar.hide('#home-toolbar');
+                });
+            }
+        }
     },
     {
         path: '/moment/',
