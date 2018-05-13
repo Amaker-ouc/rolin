@@ -62,16 +62,8 @@ public class ShopControllerTest {
         }
     }
     @Test
-    public void set() {
-        for(int i =0;i<20;i++) {
-            Random rand = new Random();
-            Shop shop = new Shop();
-            shop.setLat(rand.nextDouble() + rand.nextInt(10) + 115);
-            shop.setLng(rand.nextDouble() + rand.nextInt(2) + 34);
-            shop.setShopCatName("超市");
-            shop.setUserId(i+31);
-            shopMapper.insert(shop);
-        }
+    public void setGoods() {
+
     }
 
 }

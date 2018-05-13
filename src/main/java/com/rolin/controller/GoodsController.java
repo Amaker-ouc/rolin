@@ -76,4 +76,38 @@ public class GoodsController {
             return str;
         }
     }
+    @RequestMapping(value = "/add",method = RequestMethod.POST,produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String goodsAdd(HttpServletRequest request) throws Exception {
+        Integer goodsId = Integer.parseInt(request.getParameter("goodsId"));
+        DataResponse dataResponse =new DataResponse();
+        try {
+            Goods goods = goodsMapper.selectByPrimaryKey(goodsId);
+            ArrayList<GoodsModule> goodsModules = goodsModuleMapper.selectByGoodsId(goodsId);
+            ArrayList<ModuleList> moduleLists = new ManagedList<ModuleList>();
+            for (int i = 0; i < goodsModules.size(); i++) {
+                ModuleList moduleList = new ModuleList();
+                ArrayList<ModuleDetail> moduleDetails = moduleDetailMapper.selectByGoodsModuleId(goodsModules.get(i).getGoodsModuleId());
+                moduleList.setModuleDetails(moduleDetails);
+                moduleLists.add(moduleList);
+            }
+            ModuleDetailList moduleDetailList = new ModuleDetailList();
+            moduleDetailList.setGoods(goods);
+            moduleDetailList.setModuleLists(moduleLists);
+            dataResponse.setData(moduleDetailList);
+            JSONArray jsonArray = JSONArray.fromObject(dataResponse);
+            String str = jsonArray.toString();
+            System.out.println(str);
+            return str;
+        }
+        catch (Exception e){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            dataResponse.setCode(200);
+            dataResponse.setMsg("服务器错误");
+            JSONObject jsonObject = JSONObject.fromObject(dataResponse);
+            String str = jsonObject.toString();
+            System.out.println(str);
+            return str;
+        }
+    }
 }
