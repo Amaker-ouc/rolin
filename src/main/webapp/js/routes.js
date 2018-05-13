@@ -104,7 +104,7 @@ routes = [
                                     '<div style="background-image:url('+dataGoods.data[goodsItem].goodsImg+')" class="card-header align-items-flex-end"></div>'+
                                     '<div class="goods-card-content card-content card-content-padding">'+
                                     '<p>'+dataGoods.data[goodsItem].goodsName+'</p>'+
-                                    '<p>'+dataGoods.data[goodsItem].goodsPrice+'</p>'+
+                                    '<p>￥'+dataGoods.data[goodsItem].goodsPrice+'</p>'+
                                     '</div></div></a></div>';
                             }
 
