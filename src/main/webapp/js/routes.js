@@ -73,6 +73,54 @@ routes = [
                     homeView.router.refreshPage();
                     app.ptr.done()
                 });
+                var allowInfinite=true;
+                $$('.infinite-scroll-content').on('infinite', function () {
+                    // Exit, if loading in progress
+                    if (!allowInfinite) return;
+
+                    // Set loading flag
+                    allowInfinite = false;
+
+                    app.request.post('/shop/goods',{
+                        shopId:app.data.shop.shopId,
+                        page:app.data.shop.homeGoodsPage+1
+                    },function (dataGoods) {
+                        app.preloader.hide();
+                        if(dataGoods.code!==0){
+                            var toastBottom = app.toast.create({
+                                text: data.msg,
+                                closeTimeout: 2000,
+                            });
+                            toastBottom.open();
+                        }
+                        else{
+                            if(dataGoods) app.data.shop.homeGoodsPage++;
+                            // Generate new items HTML
+                            var html = '';
+                            for (var goodsItem in dataGoods.data) {
+                                html += '<div class="col-50">'+
+                                    '<a class="goods-card-link" href="/goods/123">'+
+                                    '<div class="goods-card card activity-card-header-pic">'+
+                                    '<div style="background-image:url('+dataGoods.data[goodsItem].goodsImg+')" class="card-header align-items-flex-end"></div>'+
+                                    '<div class="goods-card-content card-content card-content-padding">'+
+                                    '<p>'+dataGoods.data[goodsItem].goodsName+'</p>'+
+                                    '<p>'+dataGoods.data[goodsItem].goodsPrice+'</p>'+
+                                    '</div></div></a></div>';
+                            }
+
+                            // Append new items
+                            $$('#goods-box').append(html);
+                        }
+                    },function (error) {
+                        app.preloader.hide();
+                        var toastBottom = app.toast.create({
+                            text: "出错，请重试",
+                            closeTimeout: 2000,
+                        });
+                        toastBottom.open();
+                    },"json");
+
+                });
             }
         }
     },
