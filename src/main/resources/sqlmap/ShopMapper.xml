@@ -25,6 +25,17 @@
     select * from shop
     where shop_name=#{shopName}
   </select>
+  <select id="selectByLocation" parameterType="java.lang.Double" resultMap="BaseResultMap">
+    select *
+    from shop
+    order by (lng-#{lng})*(lng-#{lng})+(lat-#{lat})*(lat-#{lat})
+    limit 0,1
+  </select>
+  <select id="selectByLocationAll" parameterType="java.lang.Double" resultMap="BaseResultMap">
+    select *
+    from shop
+    order by (lng-#{lng})*(lng-#{lng})+(lat-#{lat})*(lat-#{lat})
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from shop
     where shop_id = #{shopId,jdbcType=INTEGER}
