@@ -43,6 +43,7 @@ routes = [
                                         shopName:data.data.shop.shopName,
                                         desText:data.data.shop.desText,
                                         acts:data.data.acts,
+                                        goods:dataGoods.data,
                                     }
                                 }
                             );
