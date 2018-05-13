@@ -61,8 +61,8 @@ public class GoodsController {
             moduleDetailList.setGoods(goods);
             moduleDetailList.setModuleLists(moduleLists);
             dataResponse.setData(moduleDetailList);
-            JSONArray jsonArray = JSONArray.fromObject(dataResponse);
-            String str = jsonArray.toString();
+            JSONObject jsonObject = JSONObject.fromObject(dataResponse);
+            String str = jsonObject.toString();
             System.out.println(str);
             return str;
         }
@@ -95,8 +95,8 @@ public class GoodsController {
             moduleDetailList.setGoods(goods);
             moduleDetailList.setModuleLists(moduleLists);
             dataResponse.setData(moduleDetailList);
-            JSONArray jsonArray = JSONArray.fromObject(dataResponse);
-            String str = jsonArray.toString();
+            JSONObject jsonObject = JSONObject.fromObject(dataResponse);
+            String str = jsonObject.toString();
             System.out.println(str);
             return str;
         }

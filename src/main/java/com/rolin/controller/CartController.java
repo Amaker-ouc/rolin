@@ -44,8 +44,8 @@ public class CartController {
         try {
             cartMapper.deleteByPrimaryKey(cartId);
             dataResponse.setMsg("删除成功");
-            JSONArray jsonArray = JSONArray.fromObject(dataResponse);
-            String str = jsonArray.toString();
+            JSONObject jsonObject = JSONObject.fromObject(dataResponse);
+            String str = jsonObject.toString();
             System.out.println(str);
             return str;
         }
@@ -72,8 +72,8 @@ public class CartController {
         try {
             cartMapper.insertSelective(cart);
             dataResponse.setMsg("添加成功");
-            JSONArray jsonArray = JSONArray.fromObject(dataResponse);
-            String str = jsonArray.toString();
+            JSONObject jsonObject = JSONObject.fromObject(dataResponse);
+            String str = jsonObject.toString();
             System.out.println(str);
             return str;
         }
@@ -96,8 +96,8 @@ public class CartController {
         try {
             ArrayList<Cart> cartArrayList = cartMapper.selectByUserId(userId);
             dataResponse.setData(cartArrayList);
-            JSONArray jsonArray = JSONArray.fromObject(dataResponse);
-            String str = jsonArray.toString();
+            JSONObject jsonObject = JSONObject.fromObject(dataResponse);
+            String str = jsonObject.toString();
             System.out.println(str);
             return str;
         }

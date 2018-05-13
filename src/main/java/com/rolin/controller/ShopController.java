@@ -129,8 +129,8 @@ public class ShopController {
                 ArrayList<Goods> goodsArrayList = goodsMapper.selectByShopId(shopId, page*8);
                 dataResponse.setData(goodsArrayList);
             }
-            JSONArray jsonArray = JSONArray.fromObject(dataResponse);
-            String str = jsonArray.toString();
+            JSONObject jsonObject = JSONObject.fromObject(dataResponse);
+            String str = jsonObject.toString();
             System.out.println(str);
             return str;
         }
