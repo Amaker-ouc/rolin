@@ -2,12 +2,14 @@ package com.rolin.entity;
 
 import java.util.Date;
 
-public class ShopAct {
+public class ActivityRecommend {
     private Integer shopActId;
 
-    private Integer shopId;
+    private String shopName;
 
-    private Integer actId;
+    private String shopImage;
+
+    private String actCategoryName;
 
     private Date beginTime;
 
@@ -25,20 +27,28 @@ public class ShopAct {
         this.shopActId = shopActId;
     }
 
-    public Integer getShopId() {
-        return shopId;
+    public String getShopName() {
+        return shopName;
     }
 
-    public void setShopId(Integer shopId) {
-        this.shopId = shopId;
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
     }
 
-    public Integer getActId() {
-        return actId;
+    public String getShopImage() {
+        return shopImage;
     }
 
-    public void setActId(Integer actId) {
-        this.actId = actId;
+    public void setShopImage(String shopImage) {
+        this.shopImage = shopImage;
+    }
+
+    public String getActCategoryName() {
+        return actCategoryName;
+    }
+
+    public void setActCategoryName(String actCategoryName) {
+        this.actCategoryName = actCategoryName;
     }
 
     public Date getBeginTime() {

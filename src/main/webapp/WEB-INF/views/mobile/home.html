@@ -53,7 +53,7 @@
         <div class="block-title">店铺活动</div>
         {{#each acts}}
         <div class="card activity-card-header-pic" >
-            <a href="/activity/123">
+            <a href="/activity/{{this.shopActId}}">
                 <div style="background-image:url({{this.actImg}})" class="card-header align-items-flex-end"></div>
                 <div class="card-content card-content-padding">
                     <p class="date">活动时间：2018.{{this.beginTime.month}}.{{this.beginTime.day}}-{{this.endTime.month}}.{{this.endTime.day}}</p>
@@ -78,12 +78,12 @@
             <div class="row no-gap" id="goods-box">
                 {{#each goods}}
                 <div class="col-50">
-                    <a class="goods-card-link" href="/goods/123">
+                    <a class="goods-card-link" href="/goods/{{this.goodsId}}">
                         <div class="goods-card card activity-card-header-pic">
                             <div style="background-image:url({{this.goodsImg}})" class="card-header align-items-flex-end"></div>
                             <div class="goods-card-content card-content card-content-padding">
                                 <p>{{this.goodsName}}</p>
-                                <p>{{this.goodsPrice}}</p>
+                                <p>￥{{this.goodsPrice}}</p>
                             </div>
                         </div>
                     </a>
@@ -92,5 +92,117 @@
             </div>
         </div>
         <div class="preloader infinite-scroll-preloader"></div>
+    </div>
+
+    <!-- popup -->
+    <div class="popup" id="home-login-popup">
+        <div class="view">
+            <div class="page">
+                <div class="navbar no-shadow no-hairline">
+                    <div class="navbar-inner">
+                        <div class="title ios-only">
+                            <!-- Buttons row as tabs controller in navbar-->
+                            <div class="segmented">
+                                <a href="#" class="tab-link tab-link-active button" data-tab=".tab1">登录</a>
+                                <a href="#" class="tab-link button" data-tab=".tab2">注册</a>
+                            </div>
+                        </div>
+                        <div class="title login-page-title md-only">
+                            <!-- Buttons row as tabs controller in navbar-->
+                            <div class="segmented">
+                                <a href="#" class="tab-link tab-link-active button" data-tab=".tab1">登录</a>
+                                <a href="#" class="tab-link button" data-tab=".tab2">注册</a>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <a href="#" class="popup-close icon-only link">
+                                <i class="icon f7-icons ios-only">close</i>
+                                <i class="icon material-icons md-only">close</i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-content login-screen-content">
+                    <div class="tabs-animated-wrap">
+                        <div class="tabs tabs-bottom">
+                            <div class="tab tab1 tab-active">
+                                <div class="block">
+                                    <div class="login-screen-title">登录</div>
+                                    <form class="list" id="home-login-form">
+                                        <ul>
+                                            <li class="item-content item-input">
+                                                <div class="item-inner">
+                                                    <div class="item-title item-label">账号</div>
+                                                    <div class="item-input-wrap">
+                                                        <input type="text" name="username" placeholder="输入账号">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item-content item-input">
+                                                <div class="item-inner">
+                                                    <div class="item-title item-label">密码</div>
+                                                    <div class="item-input-wrap">
+                                                        <input type="password" name="password" placeholder="输入密码">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </form>
+                                    <div class="list">
+                                        <ul>
+                                            <li>
+                                                <a href="#" class="item-link list-button login-button" id="home-login-button">登录</a>
+                                            </li>
+                                        </ul>
+                                        <div class="block-footer">Some text about login information.<br>Click "Sign In" to close Login Screen</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab tab2">
+                                <div class="block">
+                                    <div class="login-screen-title">注册</div>
+                                    <form class="list" id="register-form">
+                                        <ul>
+                                            <li class="item-content item-input">
+                                                <div class="item-inner">
+                                                    <div class="item-title item-label">账号</div>
+                                                    <div class="item-input-wrap">
+                                                        <input type="text" name="username" placeholder="输入账号">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item-content item-input">
+                                                <div class="item-inner">
+                                                    <div class="item-title item-label">密码</div>
+                                                    <div class="item-input-wrap">
+                                                        <input type="password" name="password1" placeholder="输入密码">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item-content item-input">
+                                                <div class="item-inner">
+                                                    <div class="item-title item-label">确认密码</div>
+                                                    <div class="item-input-wrap">
+                                                        <input type="password" name="password2" placeholder="再次输入密码">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </form>
+                                    <div class="list">
+                                        <ul>
+                                            <li>
+                                                <a href="#" class="item-link list-button login-button" id="register-button">注册</a>
+                                            </li>
+                                        </ul>
+                                        <div class="block-footer">Some text about login information.<br>Click "Sign In" to close Login Screen</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

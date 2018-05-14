@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rolin.dao.ActivityRecommendMapper">
+    <resultMap id="BaseResultMap" type="com.rolin.entity.ActivityRecommend">
+        <id column="shop_act_id" jdbcType="INTEGER" property="shopActId" />
+        <result column="shop_name" jdbcType="CHAR" property="shopName" />
+        <result column="head_img" jdbcType="CHAR" property="shopImage" />
+        <result column="act_name" jdbcType="CHAR" property="actCategoryName" />
+        <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+        <result column="act_img" jdbcType="CHAR" property="actImg" />
+        <result column="act_des" jdbcType="CHAR" property="actDes" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        shop_act_id, shop_name, head_img,act_name,begin_time, end_time, act_img, act_des
+    </sql>
+    <select id="selectByActId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select shop_act.shop_act_id,shop.shop_name,shop.head_img,act_cat.act_name,shop_act.begin_time,shop_act.end_time,shop_act.act_img,shop_act.act_des
+        from shop_act,shop,act_cat
+        where shop_act.shop_act_id = #{actId} and shop_act.shop_id=shop.shop_id and shop_act.act_id=act_cat.act_Id
+    </select>
+</mapper>

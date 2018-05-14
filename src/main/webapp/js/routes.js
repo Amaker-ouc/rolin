@@ -6,8 +6,8 @@ routes = [
             app.preloader.show();
             //获取店铺详情
             app.request.post('/shop/detail', {
-                lng: 1.0,
-                lat: 1.0
+                lng: 35,
+                lat: 120
             }, function (data) {
                 if (data.code !== 0) {
                     var toastBottom = app.toast.create({
@@ -68,6 +68,88 @@ routes = [
         },
         on:{
             pageAfterIn:function(){
+                if(app.data.user.userName==="未登录"){
+                    app.popup.open("#home-login-popup",true);
+                }
+                $$('#register-button').on('click',function () {
+                    app.preloader.show();
+                    var formData=app.form.convertToData('#register-form');
+                    if(formData.username===""||formData.password1===""||formData.password2===""){
+                        var toastBottom = app.toast.create({
+                            text: '输入出错，请修改',
+                            closeTimeout: 2000,
+                        });
+                        toastBottom.open();
+                        app.preloader.hide();
+                    }
+                    else if(formData.password1!==formData.password2){
+                        var toastBottom = app.toast.create({
+                            text: '密码不匹配，请确认',
+                            closeTimeout: 2000,
+                        });
+                        toastBottom.open();
+                        app.preloader.hide();
+                    }
+                    else{
+                        app.request.post('/register',{username:formData.username,password1:formData.password1,password2:formData.password2},function (data) {
+                            app.preloader.hide();
+                            if(data.code!==0){
+                                var toastBottom = app.toast.create({
+                                    text: data.msg,
+                                    closeTimeout: 2000,
+                                });
+                                toastBottom.open();
+                            }
+                            else{
+                                $$('#login-popup').close();
+                                $root.user.userName=data.data.userName;
+                            }
+                        })
+                    }
+                });
+                $$('#home-login-button').on('click',function () {
+                    app.preloader.show();
+                    var formData=app.form.convertToData('#home-login-form');
+                    if(formData.username===""||formData.password===""){
+                        var toastBottom = app.toast.create({
+                            text: '输入出错，请修改',
+                            closeTimeout: 2000,
+                        });
+                        toastBottom.open();
+                        app.preloader.hide();
+                    }
+                    else{
+                        app.request.post('/login',{username:formData.username,password:formData.password},function (data) {
+                            app.preloader.hide();
+                            if(data.code!==0){
+                                var toastBottom = app.toast.create({
+                                    text: data.msg,
+                                    closeTimeout: 2000,
+                                });
+                                toastBottom.open();
+                            }
+                            else{
+                                app.loginScreen.close('#home-login-popup');
+                                var toastCenter = app.toast.create({
+                                    text: '登录成功',
+                                    position: 'center',
+                                    closeTimeout: 2000,
+                                });
+                                toastCenter.open();
+                                app.data.user=data.data;
+                                //只能存储字符串，如果需要存储对象，首先要转化为字符串。利用JSON.stringify()；
+                                window.localStorage.setItem("user",JSON.stringify(app.data.user));
+                            }
+                        },function (error) {
+                            app.preloader.hide();
+                            var toastBottom = app.toast.create({
+                                text:error.text,
+                                closeTimeout: 2000,
+                            });
+                            toastBottom.open();
+                        },"json");
+                    }
+                })
                 var $ptrContent = $$('.ptr-content');
                 $ptrContent.on('ptr:refresh', function (e) {
                     homeView.router.refreshPage();
@@ -99,12 +181,12 @@ routes = [
                             var html = '';
                             for (var goodsItem in dataGoods.data) {
                                 html += '<div class="col-50">'+
-                                    '<a class="goods-card-link" href="/goods/123">'+
+                                    '<a class="goods-card-link" href="/goods/'+dataGoods.data[goodsItem].goodsId+'">'+
                                     '<div class="goods-card card activity-card-header-pic">'+
                                     '<div style="background-image:url('+dataGoods.data[goodsItem].goodsImg+')" class="card-header align-items-flex-end"></div>'+
                                     '<div class="goods-card-content card-content card-content-padding">'+
                                     '<p>'+dataGoods.data[goodsItem].goodsName+'</p>'+
-                                    '<p>'+dataGoods.data[goodsItem].goodsPrice+'</p>'+
+                                    '<p>￥'+dataGoods.data[goodsItem].goodsPrice+'</p>'+
                                     '</div></div></a></div>';
                             }
 
@@ -221,11 +303,70 @@ routes = [
     },
     {
         path: '/moment/',
-        templateUrl: './moment',
+        async: function (routeTo, routeFrom, resolve, reject) {
+            // Show Preloader
+            if(app.data.user.userName!=="未登录") {
+                app.preloader.show();
+                //获取店铺详情
+                app.request.post('/moment/recommend', {
+                    userId:app.data.user.userId
+                }, function (data) {
+                    app.preloader.hide();
+                    if (data.code !== 0) {
+                        var toastBottom = app.toast.create({
+                            text: data.msg,
+                            closeTimeout: 2000,
+                        });
+                        toastBottom.open();
+                    }
+                    else {
+                        resolve(
+                            {
+                                templateUrl: './moment/',
+                            },
+                            {
+                                context: {
+                                    activities: data.data,
+                                }
+                            }
+                        );
+                    }
+                }, function (error) {
+                    app.preloader.hide();
+                    var toastBottom = app.toast.create({
+                        text: "出错，请重试",
+                        closeTimeout: 2000,
+                    });
+                    toastBottom.open();
+                }, "json");
+            }
+            else{
+                resolve(
+                    {
+                        templateUrl: './moment/',
+                    },
+                    {
+                        context: {
+                            activities: {},
+                        }
+                    }
+                );
+                $$('.page-content').append("请先登录")
+            }
+        },
+        on:{
+            pageAfterIn:function(){
+                var $ptrContent = $$('.ptr-content');
+                $ptrContent.on('ptr:refresh', function (e) {
+                    momentView.router.refreshPage();
+                    app.ptr.done()
+                });
+            }
+        }
     },
     {
         path: '/cart/',
-        templateUrl: './cart',
+        templateUrl: './cart/',
     },
     {
         path: '/user/shopCollection',
@@ -264,8 +405,56 @@ routes = [
         }
     },
     {
-        path: '/activity',
-        templateUrl: './shop/:id',
+        path: '/activity/:actId',
+        async: function (routeTo, routeFrom, resolve, reject) {
+            app.preloader.show();
+            var actId = routeTo.params.actId;
+            app.request.post('/activity/detail',{
+                activityId:actId
+            },function (data) {
+                app.preloader.hide();
+                if(data.code!==0){
+                    var toastBottom = app.toast.create({
+                        text: data.msg,
+                        closeTimeout: 2000,
+                    });
+                    toastBottom.open();
+                }
+                else{
+                    resolve(
+                        {
+                            templateUrl: './activity/{{actId}}',
+                        },
+                        {
+                            context: {
+                                actImg:data.data.shopAct.actImg,
+                                actDes:data.data.shopAct.actDes,
+                                beginTime:data.data.shopAct.beginTime,
+                                endTime:data.data.shopAct.endTime,
+                                goodsList:data.data.goodsArrayList,
+                                actId:data.data.shopAct.actId,
+                            }
+                        }
+                    );
+                }
+            },function (error) {
+                app.preloader.hide();
+                var toastBottom = app.toast.create({
+                    text: "出错，请重试",
+                    closeTimeout: 2000,
+                });
+                toastBottom.open();
+            },"json");
+        },
+        on:{
+            pageAfterIn:function () {
+                app.toolbar.hide('#home-toolbar');
+                $$('.navbar').addClass('goods-navbar');
+            },
+            pageBeforeOut:function () {
+                $$('.navbar').removeClass('goods-navbar');
+            }
+        }
     },
     {
         path: '/settings/',
@@ -455,16 +644,88 @@ routes = [
         }
     },
     {
-        path: '/goods/:id',
-        templateUrl: './goods/{{id}}',
+        path: '/goods/:goodsId',
+        data:function () {
+            var goodsId;
+            return goodsId
+        },
+        async: function (routeTo, routeFrom, resolve, reject) {
+            app.preloader.show();
+            var goodsId = routeTo.params.goodsId;
+            app.data.user["recordGoodsId"]=goodsId;
+            app.request.post('/goods/detail',{
+                goodsId:goodsId
+            },function (data) {
+                app.preloader.hide();
+                if(data.code!==0){
+                    var toastBottom = app.toast.create({
+                        text: data.msg,
+                        closeTimeout: 2000,
+                    });
+                    toastBottom.open();
+                }
+                else{
+                    resolve(
+                        {
+                            templateUrl: './goods/{{goodsId}}',
+                        },
+                        {
+                            context: {
+                                goodsImg:data.data.goods.goodsImg,
+                                goodsName:data.data.goods.goodsName,
+                                goodsPrice:data.data.goods.goodsPrice,
+                                moduleLists:data.data.moduleLists,
+                            }
+                        }
+                    );
+                }
+            },function (error) {
+                app.preloader.hide();
+                var toastBottom = app.toast.create({
+                    text: "出错，请重试",
+                    closeTimeout: 2000,
+                });
+                toastBottom.open();
+            },"json");
+        },
         on:{
             pageAfterIn:function () {
                 app.toolbar.hide('#home-toolbar');
                 $$('.navbar').addClass('goods-navbar');
+                $$('#add-cart-btn').on('click',function () {
+                    app.preloader.show();
+                    app.request.post('/cart/add',{
+                        goodsId:app.data.user.recordGoodsId,
+                        userId:app.data.user.userId
+                    },function (data) {
+                        app.preloader.hide();
+                        if(data.code!==0){
+                            var toastBottom = app.toast.create({
+                                text: data.msg,
+                                closeTimeout: 2000,
+                            });
+                            toastBottom.open();
+                        }
+                        else{
+                            var toastBottom = app.toast.create({
+                                text: "添加购物车成功",
+                                position: 'center',
+                                closeTimeout: 2000,
+                            });
+                            toastBottom.open();
+                        }
+                    },function (error) {
+                        app.preloader.hide();
+                        var toastBottom = app.toast.create({
+                            text: "出错，请重试",
+                            closeTimeout: 2000,
+                        });
+                        toastBottom.open();
+                    },"json");
+                })
             },
             pageBeforeOut:function () {
                 $$('.navbar').removeClass('goods-navbar');
-                app.toolbar.show('#home-toolbar');
             }
         }
     },
