@@ -30,14 +30,14 @@ public class CartController {
         goodsMapper = applicationContext.getBean(GoodsMapper.class);
     }
 
-    @RequestMapping("/cart")
+    @RequestMapping("/")
     public ModelAndView getCart() throws Exception {
         System.out.println("/cart");
         ModelAndView mav = new ModelAndView("mobile/cart");
         return mav;
     }
     @ResponseBody
-    @RequestMapping(value="/delte",method= RequestMethod.POST,produces = "application/json; charset=utf-8")
+    @RequestMapping(value="/delete",method= RequestMethod.POST,produces = "application/json; charset=utf-8")
     public static String cartDelete(HttpServletRequest request) throws Exception{
         Integer cartId = Integer.parseInt(request.getParameter("cartId"));
         DataResponse dataResponse = new DataResponse();
@@ -60,8 +60,9 @@ public class CartController {
 
         }
     }
+
+    @RequestMapping(value="/add",method= RequestMethod.POST,produces = "application/json; charset=utf-8")
     @ResponseBody
-    @RequestMapping(value="/insert",method= RequestMethod.POST,produces = "application/json; charset=utf-8")
     public static String cartInsert(HttpServletRequest request) throws Exception{
         Integer userId = Integer.parseInt(request.getParameter("userId"));
         Integer goodsId = Integer.parseInt(request.getParameter("goodsId"));

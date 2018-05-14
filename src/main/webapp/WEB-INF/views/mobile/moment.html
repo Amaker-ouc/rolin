@@ -4,66 +4,32 @@
             <div class="title">附近/关注</div>
         </div>
     </div>
-    <div class="page-content hide-navbar-on-scroll">
+    <div class="page-content ptr-content hide-navbar-on-scroll">
+        <!-- Default pull to refresh preloader-->
+        <div class="ptr-preloader">
+            <div class="preloader"></div>
+            <div class="ptr-arrow"></div>
+        </div>
+        {{#each activities}}
+        {{#if this}}
         <div class="card moment-card">
             <div class="moment-card-header">
                 <div class="moment-card-avatar">
-                    <img src="/images/logo.jpg"/>
+                    <img src="{{this.shopImage}}"/>
                 </div>
-                <div class="moment-card-name">John Doe</div>
-                <div class="moment-card-date">Monday at 2:15 PM</div>
+                <div class="moment-card-name">{{this.shopName}}</div>
+                <div class="moment-card-date">2018.{{this.beginTime.month}}.{{this.beginTime.day}}-{{this.endTime.month}}.{{this.endTime.day}}</div>
             </div>
-            <div class="moment-card-content">
-                <div class="moment-card-content-img-inner">
-                    <img src="/images/goods.jpg"/>
+            <a href="/activity/{{this.shopActId}}">
+                <div class="moment-card-content">
+                    <div class="moment-card-content-img-inner">
+                        <img src="{{this.actImg}}"/>
+                    </div>
+                    <p class="moment-card-introduce">{{this.actDes}}</p>
                 </div>
-                <p class="moment-card-introduce">Note, that "card-header" and "card-footer" has flexbox layout (display:flex) where items have center vertical alignment. If you need to align items to top or to bottom of header/footer, then you may use additional typography classes, for exame</p>
-            </div>
+            </a>
         </div>
-        <div class="card moment-card">
-            <div class="moment-card-header">
-                <div class="moment-card-avatar">
-                    <img src="/images/logo.jpg" width="34" height="34"/>
-                </div>
-                <div class="moment-card-name">John Doe</div>
-                <div class="moment-card-date">Monday at 2:15 PM</div>
-            </div>
-            <div class="moment-card-content">
-                <div class="moment-card-content-img-inner">
-                    <img src="/images/goods.jpg"/>
-                </div>
-                <p class="moment-card-introduce">Note, that "card-header" and "card-footer" has flexbox layout (display:flex) where items have center vertical alignment. If you need to align items to top or to bottom of header/footer, then you may use additional typography classes, for exame</p>
-            </div>
-        </div>
-        <div class="card moment-card">
-            <div class="moment-card-header">
-                <div class="moment-card-avatar">
-                    <img src="/images/logo.jpg" width="34" height="34"/>
-                </div>
-                <div class="moment-card-name">John Doe</div>
-                <div class="moment-card-date">Monday at 2:15 PM</div>
-            </div>
-            <div class="moment-card-content">
-                <div class="moment-card-content-img-inner">
-                    <img src="/images/goods.jpg"/>
-                </div>
-                <p class="moment-card-introduce">Note, that "card-header" and "card-footer" has flexbox layout (display:flex) where items have center vertical alignment. If you need to align items to top or to bottom of header/footer, then you may use additional typography classes, for exame</p>
-            </div>
-        </div>
-        <div class="card moment-card">
-            <div class="moment-card-header">
-                <div class="moment-card-avatar">
-                    <img src="/images/logo.jpg" width="34" height="34"/>
-                </div>
-                <div class="moment-card-name">John Doe</div>
-                <div class="moment-card-date">Monday at 2:15 PM</div>
-            </div>
-            <div class="moment-card-content">
-                <div class="moment-card-content-img-inner">
-                    <img src="/images/goods.jpg"/>
-                </div>
-                <p class="moment-card-introduce">Note, that "card-header" and "card-footer" has flexbox layout (display:flex) where items have center vertical alignment. If you need to align items to top or to bottom of header/footer, then you may use additional typography classes, for exame</p>
-            </div>
-        </div>
+        {{/if}}
+        {{/each}}
     </div>
 </div>

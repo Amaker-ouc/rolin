@@ -3,6 +3,8 @@ var $$ = Dom7;
 
 // Framework7 App main instance
 var app  = new Framework7({
+    cache:true,
+    cacheDuration: 1000*60*10,
     root: '#app', // App root element
     id: 'io.framework7.testapp', // App bundle ID
     name: 'Framework7', // App name
