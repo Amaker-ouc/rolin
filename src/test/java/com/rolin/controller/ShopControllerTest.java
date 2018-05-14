@@ -3,16 +3,10 @@ package com.rolin.controller;
 import com.rolin.dao.*;
 import com.rolin.entity.Shop;
 import com.rolin.entity.User;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.util.Random;
-
-import javax.servlet.http.HttpServletRequest;
-
-import static org.junit.Assert.*;
-
 public class ShopControllerTest {
 
     private static ShopController shopController;
@@ -63,6 +57,7 @@ public class ShopControllerTest {
     }
     @Test
     public void setGoods() {
+
 
     }
 
