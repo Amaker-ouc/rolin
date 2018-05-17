@@ -26,6 +26,7 @@ var app  = new Framework7({
                 'userName':'未登录',
                 'head':"http://iph.href.lu/60x60?text=...&fg=ffffff&bg=ddd",
                 'shop':{},
+                'activityCache':false
             };
             var shop={}
         }
@@ -64,7 +65,7 @@ var homeView = app.views.create('#view-home', {
 var momentView = app.views.create('#view-moment', {
     url: '/moment/'
 });
-var CartView = app.views.create('#view-cart', {
+var cartView = app.views.create('#view-cart', {
     url: '/cart/'
 });
 var userView = app.views.create('#view-user', {

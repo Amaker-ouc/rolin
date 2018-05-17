@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rolin.dao.CartDetailMapper">
+    <resultMap id="BaseResultMap" type="com.rolin.entity.CartDetail">
+        <id column="cart_id" jdbcType="INTEGER" property="cartId" />
+        <result column="shop_name" jdbcType="CHAR" property="shopName" />
+        <result column="goods_name" jdbcType="CHAR" property="goodsName" />
+        <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
+        <result column="goods_price" jdbcType="INTEGER" property="goodsPrice" />
+        <result column="goods_img" jdbcType="CHAR" property="goodsImg" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        cart_id, shop_name, cart_id,goods_id,goods_price, goods_img,
+    </sql>
+    <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select cart.cart_id,shop.shop_name,goods.goods_name,goods.shop_id,goods.goods_price,goods.goods_img
+        from cart,goods,shop
+        where cart.user_id = #{userId} and cart.goods_id=goods.goods_id and goods.shop_id=shop.shop_id
+    </select>
+</mapper>

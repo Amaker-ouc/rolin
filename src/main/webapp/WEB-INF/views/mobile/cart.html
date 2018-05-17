@@ -9,45 +9,52 @@
             <div class="row">
                 <div class="col cart-pay-bar-inner-select">
                     <label class="checkbox">
-                        <input type="checkbox">
+                        <input type="checkbox" id="cart-select-all-checkbox">
                         <i class="icon-checkbox"></i>
                     </label>
                     <span>全选</span>
                 </div>
                 <div class="col cart-pay-bar-inner-sum">
-                    <span>合计:</span><span class="sum">￥200</span>
+                    <span>合计:</span><span class="sum">￥<span id="priceSum">0</span></span>
                 </div>
                 <div class="col cart-pay-bar-inner-pay-btn">
-                    <a class="button" href="/order/commit">结算</a>
+                    <a class="button" href="#" id="buy-btn">结算</a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="page-content cart-page-content hide-navbar-on-scroll">
+    <div class="page-content ptr-content cart-page-content hide-navbar-on-scroll" id="cart-page-content">
+        <div class="ptr-preloader">
+            <div class="preloader"></div>
+            <div class="ptr-arrow"></div>
+        </div>
+        {{#each cartShop}}
         <div class="card cart-card">
             <div class="cart-card-header">
                 <div class="cart-card-name">
-                    <label class="checkbox">
-                        <input type="checkbox">
-                        <i class="icon-checkbox"></i>
-                    </label>
-                    <span>John Doe</span>
+                    <!--<label class="checkbox">-->
+                        <!--<input type="checkbox" class="shop-checkbox">-->
+                        <!--<i class="icon-checkbox"></i>-->
+                    <!--</label>-->
+                    <span>{{@key}}</span>
                     <i class="icon f7-icons color-red">delete_round</i>
                 </div>
             </div>
             <div class="card-content">
                 <div class="list media-list">
                     <ul>
+                        {{#each this}}
                         <li class="swipeout">
                             <label class="item-checkbox item-content swipeout-content">
-                                <input type="checkbox" name="demo-media-checkbox" value="1"/>
+                                <input type="checkbox" class="goods-checkbox" name="demo-media-checkbox"
+                                       value="{{this.goodsPrice}}" id="cartId-{{this.cartId}}"/>
                                 <i class="icon icon-checkbox"></i>
-                                <div class="item-media"><img src="/images/imgLoad.jpg" width="44"/></div>
+                                <div class="item-media"><img src="{{this.goodsImg}}" width="44"/></div>
                                 <div class="item-inner">
                                     <div class="item-title-row">
-                                        <div class="item-title">Yellow Submarine</div>
+                                        <div class="item-title">{{this.goodsName}}</div>
                                     </div>
-                                    <div class="item-subtitle">Beatles</div>
+                                    <div class="item-subtitle ">￥{{this.goodsPrice}}</div>
                                 </div>
                             </label>
                             <div class="swipeout-actions-right">
@@ -55,318 +62,11 @@
                                 <a href="#" class="color-red">删除</a>
                             </div>
                         </li>
-                        <li class="swipeout">
-                            <label class="item-checkbox item-content swipeout-content">
-                                <input type="checkbox" name="demo-media-checkbox" value="1"/>
-                                <i class="icon icon-checkbox"></i>
-                                <div class="item-media"><img src="/images/imgLoad.jpg" width="44"/></div>
-                                <div class="item-inner">
-                                    <div class="item-title-row">
-                                        <div class="item-title">Yellow Submarine</div>
-                                    </div>
-                                    <div class="item-subtitle">Beatles</div>
-                                </div>
-                            </label>
-                            <div class="swipeout-actions-right">
-                                <a href="#" class="color-orange">编辑</a>
-                                <a href="#" class="color-red">删除</a>
-                            </div>
-                        </li>
-                        <li class="swipeout">
-                            <label class="item-checkbox item-content swipeout-content">
-                                <input type="checkbox" name="demo-media-checkbox" value="1"/>
-                                <i class="icon icon-checkbox"></i>
-                                <div class="item-media"><img src="/images/imgLoad.jpg" width="44"/></div>
-                                <div class="item-inner">
-                                    <div class="item-title-row">
-                                        <div class="item-title">Yellow Submarine</div>
-                                    </div>
-                                    <div class="item-subtitle">Beatles</div>
-                                </div>
-                            </label>
-                            <div class="swipeout-actions-right">
-                                <a href="#" class="color-orange">编辑</a>
-                                <a href="#" class="color-red">删除</a>
-                            </div>
-                        </li>
-                        <li class="swipeout">
-                            <label class="item-checkbox item-content swipeout-content">
-                                <input type="checkbox" name="demo-media-checkbox" value="1"/>
-                                <i class="icon icon-checkbox"></i>
-                                <div class="item-media"><img src="/images/imgLoad.jpg" width="44"/></div>
-                                <div class="item-inner">
-                                    <div class="item-title-row">
-                                        <div class="item-title">Yellow Submarine</div>
-                                    </div>
-                                    <div class="item-subtitle">Beatles</div>
-                                </div>
-                            </label>
-                            <div class="swipeout-actions-right">
-                                <a href="#" class="color-orange">编辑</a>
-                                <a href="#" class="color-red">删除</a>
-                            </div>
-                        </li>
+                        {{/each}}
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="card cart-card">
-            <div class="cart-card-header">
-                <div class="cart-card-name">
-                    <label class="checkbox">
-                        <input type="checkbox">
-                        <i class="icon-checkbox"></i>
-                    </label>
-                    <span>John Doe</span>
-                    <i class="icon f7-icons color-red">delete_round</i>
-                </div>
-            </div>
-            <div class="card-content">
-                <div class="list media-list">
-                    <ul>
-                        <li class="swipeout">
-                            <label class="item-checkbox item-content swipeout-content">
-                                <input type="checkbox" name="demo-media-checkbox" value="1"/>
-                                <i class="icon icon-checkbox"></i>
-                                <div class="item-media"><img src="/images/imgLoad.jpg" width="44"/></div>
-                                <div class="item-inner">
-                                    <div class="item-title-row">
-                                        <div class="item-title">Yellow Submarine</div>
-                                    </div>
-                                    <div class="item-subtitle">Beatles</div>
-                                </div>
-                            </label>
-                            <div class="swipeout-actions-right">
-                                <a href="#" class="color-orange">编辑</a>
-                                <a href="#" class="color-red">删除</a>
-                            </div>
-                        </li>
-                        <li class="swipeout">
-                            <label class="item-checkbox item-content swipeout-content">
-                                <input type="checkbox" name="demo-media-checkbox" value="1"/>
-                                <i class="icon icon-checkbox"></i>
-                                <div class="item-media"><img src="/images/imgLoad.jpg" width="44"/></div>
-                                <div class="item-inner">
-                                    <div class="item-title-row">
-                                        <div class="item-title">Yellow Submarine</div>
-                                    </div>
-                                    <div class="item-subtitle">Beatles</div>
-                                </div>
-                            </label>
-                            <div class="swipeout-actions-right">
-                                <a href="#" class="color-orange">编辑</a>
-                                <a href="#" class="color-red">删除</a>
-                            </div>
-                        </li>
-                        <li class="swipeout">
-                            <label class="item-checkbox item-content swipeout-content">
-                                <input type="checkbox" name="demo-media-checkbox" value="1"/>
-                                <i class="icon icon-checkbox"></i>
-                                <div class="item-media"><img src="/images/imgLoad.jpg" width="44"/></div>
-                                <div class="item-inner">
-                                    <div class="item-title-row">
-                                        <div class="item-title">Yellow Submarine</div>
-                                    </div>
-                                    <div class="item-subtitle">Beatles</div>
-                                </div>
-                            </label>
-                            <div class="swipeout-actions-right">
-                                <a href="#" class="color-orange">编辑</a>
-                                <a href="#" class="color-red">删除</a>
-                            </div>
-                        </li>
-                        <li class="swipeout">
-                            <label class="item-checkbox item-content swipeout-content">
-                                <input type="checkbox" name="demo-media-checkbox" value="1"/>
-                                <i class="icon icon-checkbox"></i>
-                                <div class="item-media"><img src="/images/imgLoad.jpg" width="44"/></div>
-                                <div class="item-inner">
-                                    <div class="item-title-row">
-                                        <div class="item-title">Yellow Submarine</div>
-                                    </div>
-                                    <div class="item-subtitle">Beatles</div>
-                                </div>
-                            </label>
-                            <div class="swipeout-actions-right">
-                                <a href="#" class="color-orange">编辑</a>
-                                <a href="#" class="color-red">删除</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="card cart-card">
-            <div class="cart-card-header">
-                <div class="cart-card-name">
-                    <label class="checkbox">
-                        <input type="checkbox">
-                        <i class="icon-checkbox"></i>
-                    </label>
-                    <span>John Doe</span>
-                    <i class="icon f7-icons color-red">delete_round</i>
-                </div>
-            </div>
-            <div class="card-content">
-                <div class="list media-list">
-                    <ul>
-                        <li class="swipeout">
-                            <label class="item-checkbox item-content swipeout-content">
-                                <input type="checkbox" name="demo-media-checkbox" value="1"/>
-                                <i class="icon icon-checkbox"></i>
-                                <div class="item-media"><img src="/images/imgLoad.jpg" width="44"/></div>
-                                <div class="item-inner">
-                                    <div class="item-title-row">
-                                        <div class="item-title">Yellow Submarine</div>
-                                    </div>
-                                    <div class="item-subtitle">Beatles</div>
-                                </div>
-                            </label>
-                            <div class="swipeout-actions-right">
-                                <a href="#" class="color-orange">编辑</a>
-                                <a href="#" class="color-red">删除</a>
-                            </div>
-                        </li>
-                        <li class="swipeout">
-                            <label class="item-checkbox item-content swipeout-content">
-                                <input type="checkbox" name="demo-media-checkbox" value="1"/>
-                                <i class="icon icon-checkbox"></i>
-                                <div class="item-media"><img src="/images/imgLoad.jpg" width="44"/></div>
-                                <div class="item-inner">
-                                    <div class="item-title-row">
-                                        <div class="item-title">Yellow Submarine</div>
-                                    </div>
-                                    <div class="item-subtitle">Beatles</div>
-                                </div>
-                            </label>
-                            <div class="swipeout-actions-right">
-                                <a href="#" class="color-orange">编辑</a>
-                                <a href="#" class="color-red">删除</a>
-                            </div>
-                        </li>
-                        <li class="swipeout">
-                            <label class="item-checkbox item-content swipeout-content">
-                                <input type="checkbox" name="demo-media-checkbox" value="1"/>
-                                <i class="icon icon-checkbox"></i>
-                                <div class="item-media"><img src="/images/imgLoad.jpg" width="44"/></div>
-                                <div class="item-inner">
-                                    <div class="item-title-row">
-                                        <div class="item-title">Yellow Submarine</div>
-                                    </div>
-                                    <div class="item-subtitle">Beatles</div>
-                                </div>
-                            </label>
-                            <div class="swipeout-actions-right">
-                                <a href="#" class="color-orange">编辑</a>
-                                <a href="#" class="color-red">删除</a>
-                            </div>
-                        </li>
-                        <li class="swipeout">
-                            <label class="item-checkbox item-content swipeout-content">
-                                <input type="checkbox" name="demo-media-checkbox" value="1"/>
-                                <i class="icon icon-checkbox"></i>
-                                <div class="item-media"><img src="/images/imgLoad.jpg" width="44"/></div>
-                                <div class="item-inner">
-                                    <div class="item-title-row">
-                                        <div class="item-title">Yellow Submarine</div>
-                                    </div>
-                                    <div class="item-subtitle">Beatles</div>
-                                </div>
-                            </label>
-                            <div class="swipeout-actions-right">
-                                <a href="#" class="color-orange">编辑</a>
-                                <a href="#" class="color-red">删除</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="card cart-card">
-            <div class="cart-card-header">
-                <div class="cart-card-name">
-                    <label class="checkbox">
-                        <input type="checkbox">
-                        <i class="icon-checkbox"></i>
-                    </label>
-                    <span>John Doe</span>
-                    <i class="icon f7-icons color-red">delete_round</i>
-                </div>
-            </div>
-            <div class="card-content">
-                <div class="list media-list">
-                    <ul>
-                        <li class="swipeout">
-                            <label class="item-checkbox item-content swipeout-content">
-                                <input type="checkbox" name="demo-media-checkbox" value="1"/>
-                                <i class="icon icon-checkbox"></i>
-                                <div class="item-media"><img src="/images/imgLoad.jpg" width="44"/></div>
-                                <div class="item-inner">
-                                    <div class="item-title-row">
-                                        <div class="item-title">Yellow Submarine</div>
-                                    </div>
-                                    <div class="item-subtitle">Beatles</div>
-                                </div>
-                            </label>
-                            <div class="swipeout-actions-right">
-                                <a href="#" class="color-orange">编辑</a>
-                                <a href="#" class="color-red">删除</a>
-                            </div>
-                        </li>
-                        <li class="swipeout">
-                            <label class="item-checkbox item-content swipeout-content">
-                                <input type="checkbox" name="demo-media-checkbox" value="1"/>
-                                <i class="icon icon-checkbox"></i>
-                                <div class="item-media"><img src="/images/imgLoad.jpg" width="44"/></div>
-                                <div class="item-inner">
-                                    <div class="item-title-row">
-                                        <div class="item-title">Yellow Submarine</div>
-                                    </div>
-                                    <div class="item-subtitle">Beatles</div>
-                                </div>
-                            </label>
-                            <div class="swipeout-actions-right">
-                                <a href="#" class="color-orange">编辑</a>
-                                <a href="#" class="color-red">删除</a>
-                            </div>
-                        </li>
-                        <li class="swipeout">
-                            <label class="item-checkbox item-content swipeout-content">
-                                <input type="checkbox" name="demo-media-checkbox" value="1"/>
-                                <i class="icon icon-checkbox"></i>
-                                <div class="item-media"><img src="/images/imgLoad.jpg" width="44"/></div>
-                                <div class="item-inner">
-                                    <div class="item-title-row">
-                                        <div class="item-title">Yellow Submarine</div>
-                                    </div>
-                                    <div class="item-subtitle">Beatles</div>
-                                </div>
-                            </label>
-                            <div class="swipeout-actions-right">
-                                <a href="#" class="color-orange">编辑</a>
-                                <a href="#" class="color-red">删除</a>
-                            </div>
-                        </li>
-                        <li class="swipeout">
-                            <label class="item-checkbox item-content swipeout-content">
-                                <input type="checkbox" name="demo-media-checkbox" value="1"/>
-                                <i class="icon icon-checkbox"></i>
-                                <div class="item-media"><img src="/images/imgLoad.jpg" width="44"/></div>
-                                <div class="item-inner">
-                                    <div class="item-title-row">
-                                        <div class="item-title">Yellow Submarine</div>
-                                    </div>
-                                    <div class="item-subtitle">Beatles</div>
-                                </div>
-                            </label>
-                            <div class="swipeout-actions-right">
-                                <a href="#" class="color-orange">编辑</a>
-                                <a href="#" class="color-red">删除</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        {{/each}}
     </div>
 </div>

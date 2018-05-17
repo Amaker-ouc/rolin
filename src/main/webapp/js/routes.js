@@ -150,7 +150,7 @@ routes = [
                         },"json");
                     }
                 })
-                var $ptrContent = $$('.ptr-content');
+                var $ptrContent = $$('#home-page-content');
                 $ptrContent.on('ptr:refresh', function (e) {
                     homeView.router.refreshPage();
                     app.ptr.done()
@@ -303,61 +303,77 @@ routes = [
     },
     {
         path: '/moment/',
+        cache:true,
+        cacheDuration: 1000*60*10,
         async: function (routeTo, routeFrom, resolve, reject) {
-            // Show Preloader
-            if(app.data.user.userName!=="未登录") {
-                app.preloader.show();
-                //获取店铺详情
-                app.request.post('/moment/recommend', {
-                    userId:app.data.user.userId
-                }, function (data) {
-                    app.preloader.hide();
-                    if (data.code !== 0) {
+            if(!app.data.user.activityCache) {
+                app.data.user.activityCache=true;
+                if (app.data.user.userName !== "未登录") {
+                    app.preloader.show();
+                    //获取店铺详情
+                    app.request.post('/moment/recommend', {
+                        userId: app.data.user.userId
+                    }, function (data) {
+                        app.data.user['activities']=data.data;
+                        app.preloader.hide();
+                        if (data.code !== 0) {
+                            var toastBottom = app.toast.create({
+                                text: data.msg,
+                                closeTimeout: 2000,
+                            });
+                            toastBottom.open();
+                        }
+                        else {
+                            resolve(
+                                {
+                                    templateUrl: './moment/',
+                                },
+                                {
+                                    context: {
+                                        activities: data.data,
+                                    }
+                                }
+                            );
+                        }
+                    }, function (error) {
+                        app.preloader.hide();
                         var toastBottom = app.toast.create({
-                            text: data.msg,
+                            text: "出错，请重试",
                             closeTimeout: 2000,
                         });
                         toastBottom.open();
-                    }
-                    else {
-                        resolve(
-                            {
-                                templateUrl: './moment/',
-                            },
-                            {
-                                context: {
-                                    activities: data.data,
-                                }
+                    }, "json");
+                }
+                else {
+                    resolve(
+                        {
+                            templateUrl: './moment/',
+                        },
+                        {
+                            context: {
+                                activities: {},
                             }
-                        );
-                    }
-                }, function (error) {
-                    app.preloader.hide();
-                    var toastBottom = app.toast.create({
-                        text: "出错，请重试",
-                        closeTimeout: 2000,
-                    });
-                    toastBottom.open();
-                }, "json");
-            }
-            else{
-                resolve(
-                    {
-                        templateUrl: './moment/',
-                    },
-                    {
-                        context: {
-                            activities: {},
                         }
-                    }
-                );
-                $$('.page-content').append("请先登录")
+                    );
+                    $$('.page-content').append("请先登录")
+                }
             }
+            resolve(
+                {
+                    templateUrl: './moment/',
+                },
+                {
+                    context: {
+                        activities: app.data.user.activities,
+                    }
+                }
+            );
         },
         on:{
             pageAfterIn:function(){
-                var $ptrContent = $$('.ptr-content');
+                var $ptrContent = $$('#moment-page-content');
                 $ptrContent.on('ptr:refresh', function (e) {
+                    app.data.user.activityCache=false;
                     momentView.router.refreshPage();
                     app.ptr.done()
                 });
@@ -366,7 +382,107 @@ routes = [
     },
     {
         path: '/cart/',
-        templateUrl: './cart/',
+        async: function (routeTo, routeFrom, resolve, reject) {
+            // Show Preloader
+            app.preloader.show();
+            //获取店铺详情
+            app.request.post('/cart/detail', {
+                userId:app.data.user.userId
+            }, function (data) {
+                app.preloader.hide();
+                if (data.code !== 0) {
+                    var toastBottom = app.toast.create({
+                        text: data.msg,
+                        closeTimeout: 2000,
+                    });
+                    toastBottom.open();
+                }
+                else {
+                    app.data.user['cart']=data.data;
+                    resolve(
+                        {
+                            templateUrl: './cart/',
+                        },
+                        {
+                            context: {
+                                cartShop:data.data,
+                            }
+                        }
+                    );
+                }
+            }, function (error) {
+                app.preloader.hide();
+                var toastBottom = app.toast.create({
+                    text: "出错，请重试",
+                    closeTimeout: 2000,
+                });
+                toastBottom.open();
+            }, "json");
+        },
+        on:{
+            pageAfterIn:function () {
+                $$('.goods-checkbox').on('change',function () {
+                    var priceSum=0;
+                    $$('.goods-checkbox').each(function () {
+                        if(this.checked) priceSum+=parseInt(this.value);
+                    });
+                    $$('#priceSum').text(priceSum);
+                });
+                $$('#cart-select-all-checkbox').on('change',function () {
+                    var priceSum=0;
+                    if(this.checked) {
+                        $$('.goods-checkbox').each(function () {
+                            this.checked=true;
+                            priceSum+=parseInt(this.value);
+                        });
+                        $$('#priceSum').text(priceSum);
+                    }
+                    else{
+                        $$('.goods-checkbox').each(function () {
+                            this.checked=false;
+                        });
+                    }
+                    $$('#priceSum').text(priceSum);
+                });
+                var $ptrContent = $$('#cart-page-content');
+                $ptrContent.on('ptr:refresh', function (e) {
+                    cartView.router.refreshPage();
+                    app.ptr.done()
+                });
+                $$('#buy-btn').on('click',function () {
+                    $$('.goods-checkbox').each(function () {
+                        if(this.checked) {
+                            var cartId=parseInt(this.id.substring(7));
+                            app.request.post('/cart/delete', {
+                                cartId:cartId
+                            },function (data) {
+                                if (data.code !== 0) {
+                                    var toastBottom = app.toast.create({
+                                        text: data.msg,
+                                        closeTimeout: 2000,
+                                    });
+                                    toastBottom.open();
+                                }
+                            },function (error) {
+                                app.preloader.hide();
+                                var toastBottom = app.toast.create({
+                                    text: "出错，请重试",
+                                    closeTimeout: 2000,
+                                });
+                                toastBottom.open();
+                            },'json');
+                        }
+                    });
+                    var toastBottom = app.toast.create({
+                        text: "购买成功",
+                        position: 'center',
+                        closeTimeout: 2000,
+                    });
+                    toastBottom.open();
+                    cartView.router.refreshPage();
+                })
+            }
+        }
     },
     {
         path: '/user/shopCollection',

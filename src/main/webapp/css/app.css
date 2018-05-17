@@ -5,7 +5,9 @@
 .ios .tabbar-labels .tab-link.tab-link-active .icon:not(.icon-ios-fill) {
     display: none;
 }
-
+.ios .navbar .f7-icons{
+    font-weight: bold !important;
+}
 /* A bit of demo styles */
 .home-swiper .swiper-slide {
     font-size: 25px;
@@ -16,16 +18,23 @@
     background: #fff;
     color: #000;
 }
+.home-swiper .swiper-slide img{
+    width: 100%;
+}
 .home-swiper {
     margin: 0px 0 35px;
     font-size: 18px;
-    height: 120px;
+    height: 200px;
+}
+.introduction{
+    color:black !important;
 }
 .introduction>p,.block-title{
     text-align: center;
 }
 .introduction p:first-child{
     font-size: 18px;
+    font-weight: bold;
 }
 
 .activity-card-header-pic .card-header {

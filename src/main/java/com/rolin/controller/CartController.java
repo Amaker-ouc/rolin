@@ -1,8 +1,10 @@
 package com.rolin.controller;
 
+import com.rolin.dao.CartDetailMapper;
 import com.rolin.dao.CartMapper;
 import com.rolin.dao.GoodsMapper;
 import com.rolin.entity.Cart;
+import com.rolin.entity.CartDetail;
 import com.rolin.utils.DataResponse;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -17,17 +19,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/cart")
 public class CartController {
     private static CartMapper cartMapper;
+    private static CartDetailMapper cartDetailMapper;
     private static GoodsMapper goodsMapper;
     private static ApplicationContext applicationContext;
     static {
         applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml");//����spring�����ļ�
         cartMapper = applicationContext.getBean(CartMapper.class);
         goodsMapper = applicationContext.getBean(GoodsMapper.class);
+        cartDetailMapper=applicationContext.getBean(CartDetailMapper.class);
     }
 
     @RequestMapping("/")
@@ -90,13 +96,22 @@ public class CartController {
         }
     }
     @ResponseBody
-    @RequestMapping(value="/",method= RequestMethod.POST,produces = "application/json; charset=utf-8")
+    @RequestMapping(value="/detail",method= RequestMethod.POST,produces = "application/json; charset=utf-8")
     public static String cartSelect(HttpServletRequest request) throws Exception{
         Integer userId = Integer.parseInt(request.getParameter("userId"));
         DataResponse dataResponse = new DataResponse();
         try {
-            ArrayList<Cart> cartArrayList = cartMapper.selectByUserId(userId);
-            dataResponse.setData(cartArrayList);
+            ArrayList<CartDetail> cartDetailArrayList = cartDetailMapper.selectByUserId(userId);
+            HashMap<String,ArrayList<CartDetail>> hashMap=new HashMap<String, ArrayList<CartDetail>>();
+            for(CartDetail c: cartDetailArrayList){
+                if(hashMap.containsKey(c.getShopName())) hashMap.get(c.getShopName()).add(c);
+                else {
+                    ArrayList<CartDetail> cartDetails=new ArrayList<CartDetail>();
+                    cartDetails.add(c);
+                    hashMap.put(c.getShopName(),cartDetails);
+                }
+            }
+            dataResponse.setData(hashMap);
             JSONObject jsonObject = JSONObject.fromObject(dataResponse);
             String str = jsonObject.toString();
             System.out.println(str);
@@ -113,6 +128,4 @@ public class CartController {
 
         }
     }
-
-
 }
